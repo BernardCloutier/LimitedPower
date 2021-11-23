@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://ElectricArc.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/ElectricArc.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/spark.png" type="Texture" id=2]
 
 [sub_resource type="SpatialMaterial" id=6]

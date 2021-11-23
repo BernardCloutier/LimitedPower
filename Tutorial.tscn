@@ -44,8 +44,6 @@ material/0 = SubResource( 2 )
 [node name="CollisionShape" type="CollisionShape" parent="Platform2"]
 shape = SubResource( 3 )
 
-[node name="Arcs" type="Spatial" parent="."]
-
 [node name="Recharger" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5 )
 script = ExtResource( 2 )
@@ -63,6 +61,8 @@ depth = 4.0
 [node name="CSGSphere" type="CSGSphere" parent="Recharger/CSGBox"]
 operation = 2
 radius = 2.82946
+
+[node name="SpawnedEntities" type="Spatial" parent="."]
 
 [connection signal="body_entered" from="Recharger" to="Recharger" method="_on_body_entered"]
 [connection signal="body_exited" from="Recharger" to="Recharger" method="_on_body_exited"]

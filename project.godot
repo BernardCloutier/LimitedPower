@@ -22,7 +22,12 @@ _global_script_classes=[ {
 "base": "ImmediateGeometry",
 "class": "ElectricArc",
 "language": "GDScript",
-"path": "res://ElectricArc.gd"
+"path": "res://Scripts/ElectricArc.gd"
+}, {
+"base": "Spatial",
+"class": "Hand",
+"language": "GDScript",
+"path": "res://Scripts/Entities/Hand.gd"
 }, {
 "base": "KinematicBody",
 "class": "KinematicEntity",
@@ -38,6 +43,7 @@ _global_script_class_icons={
 "BunnyHopMovement": "",
 "CharacterController": "",
 "ElectricArc": "",
+"Hand": "",
 "KinematicEntity": "",
 "Movement": ""
 }

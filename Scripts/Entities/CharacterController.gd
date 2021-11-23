@@ -1,51 +1,55 @@
 class_name CharacterController
 extends KinematicEntity
 
-export(PackedScene) var ElectricArcScene
+export(PackedScene) var HandScene
 export(float, 0.0, 3.0) var EnergyDrainSpeed = 0.2
 
 onready var _head_pivot := $HeadPivot
 onready var _raycast := $HeadPivot/RayCast
-onready var _left_hand := $HeadPivot/LeftHand
-onready var _right_hand := $HeadPivot/RightHand
+onready var _left_hand_pos := $HeadPivot/LeftHandPos
+onready var _right_hand_pos := $HeadPivot/RightHandPos
+
+var _left_hand: Hand 
+var _right_hand: Hand
 
 var energy_level: float = 1.0
 
-var _left_arcs := []
-var _right_arcs := []
-
-var _is_shooting_left: bool = false
-var _is_shooting_right: bool = false
 
 func _ready() -> void:
-	for _i in range(0, 8):
-		var left_arc = self.ElectricArcScene.instance()
-		self._left_arcs.push_back(left_arc)
-		self._left_hand.add_child(left_arc)
-		
-		var right_arc = self.ElectricArcScene.instance()
-		self._right_arcs.push_back(right_arc)
-		self._right_hand.add_child(right_arc)
+	self._left_hand = HandScene.instance()
+	self._right_hand = HandScene.instance()
+	get_node("../SpawnedEntities").add_child(self._left_hand)
+	get_node("../SpawnedEntities").add_child(self._right_hand)
+	
+	self._left_hand.track_target = self._left_hand_pos
+	self._right_hand.track_target = self._right_hand_pos
 
 
 func _process(delta: float) -> void:
+	if !self.is_on_floor():
+		self.stop_shooting()
+
 	if self._raycast.is_colliding():
 		var dist = (self._raycast.get_collision_point() - self._left_hand.global_transform.origin).length()
-		for arc in self._left_arcs:
-			arc.target_dist = dist
+		var target = self._raycast.get_collision_point()
+		self._left_hand.target = target
+		self._right_hand.target = target
 	
-	if _is_shooting_left:
+	if self._left_hand.is_shooting():
 		self.energy_level -= self.EnergyDrainSpeed * delta
-	if _is_shooting_right:
+	if self._right_hand.is_shooting():
 		self.energy_level -= self.EnergyDrainSpeed * delta
 	self.energy_level = max(self.energy_level, 0)
 
 	if !self._has_energy():
-		self.stop_shooting_left()
-		self.stop_shooting_right()
+		self.stop_shooting()
 
 
 func move(forward: float, sideways: float) -> void:
+	if self._is_shooting():
+		self._movement_dir = Vector3.ZERO
+		return
+
 	var dir = Vector3.ZERO
 	dir += forward * self.global_transform.basis.z
 	dir += sideways * self._head_pivot.global_transform.basis.x
@@ -59,34 +63,31 @@ func turn(x_rotation: float, y_rotation: float) -> void:
 
 
 func start_shooting_left() -> void:
-	if !self._has_energy():
+	if self._can_shoot():
 		return
 
-	self._is_shooting_left = true
-	for arc in self._left_arcs:
-		arc.is_enabled = true
+	self._left_hand.shoot()
 
 
 func stop_shooting_left() -> void:
-	self._is_shooting_left = false
-	for arc in self._left_arcs:
-		arc.is_enabled = false
+	self._left_hand.stop_shooting()
 
 
 
 func start_shooting_right() -> void:
-	if !self._has_energy():
+	if self._can_shoot():
 		return
 
-	self._is_shooting_right = true
-	for arc in self._right_arcs:
-		arc.is_enabled = true
+	self._right_hand.shoot()
 
 
 func stop_shooting_right() -> void:
-	self._is_shooting_right = false
-	for arc in self._right_arcs:
-		arc.is_enabled = false
+	self._right_hand.stop_shooting()
+
+
+func stop_shooting() -> void:
+	self.stop_shooting_left()
+	self.stop_shooting_right()
 
 
 func recharge(energy: float):
@@ -95,6 +96,14 @@ func recharge(energy: float):
 
 func _has_energy() -> bool:
 	return self.energy_level > 0.0
+
+
+func _is_shooting() -> bool:
+		return self._left_hand.is_shooting() or self._right_hand.is_shooting()
+
+
+func _can_shoot() -> bool:
+	return !self._has_energy() or !self.is_on_floor()
 
 
 func _on_Recharger_body_entered(body):
