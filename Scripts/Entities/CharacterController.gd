@@ -4,13 +4,16 @@ extends KinematicEntity
 export(PackedScene) var HandScene
 export(float, 0.0, 3.0) var EnergyDrainSpeed = 0.2
 
-onready var _head_pivot := $HeadPivot
-onready var _raycast := $HeadPivot/RayCast
-onready var _left_hand_pos := $HeadPivot/LeftHandPos
-onready var _right_hand_pos := $HeadPivot/RightHandPos
+onready var _harness := $Harness
+onready var _head_pivot := $Harness/HeadPivot
+onready var _raycast := $Harness/HeadPivot/RayCast
+onready var _left_hand_pos := $Harness/HeadPivot/LeftHandPos
+onready var _right_hand_pos := $Harness/HeadPivot/RightHandPos
 
 var _left_hand: Hand 
 var _right_hand: Hand
+var _left_charge_target: Chargeable
+var _right_charge_target: Chargeable
 
 var energy_level: float = 1.0
 
@@ -18,8 +21,8 @@ var energy_level: float = 1.0
 func _ready() -> void:
 	self._left_hand = HandScene.instance()
 	self._right_hand = HandScene.instance()
-	get_node("../SpawnedEntities").add_child(self._left_hand)
-	get_node("../SpawnedEntities").add_child(self._right_hand)
+	self.add_child(self._left_hand)
+	self.add_child(self._right_hand)
 	
 	self._left_hand.copy_transform(self._left_hand_pos)
 	self._right_hand.copy_transform(self._right_hand_pos)
@@ -34,11 +37,27 @@ func _process(delta: float) -> void:
 		var target = self._raycast.get_collision_point()
 		self._left_hand.target = target
 		self._right_hand.target = target
+		
+		var object = self._raycast.get_collider()
+		if object is Chargeable:
+			if self._left_hand.is_shooting():
+				self._left_charge_target = object
+			if self._right_hand.is_shooting():
+				self._right_charge_target = object
+	else:
+		self.stop_shooting()
 	
+	# TODO: If both hands, charge even faster
 	if self._left_hand.is_shooting():
-		self.energy_level -= self.EnergyDrainSpeed * delta
+		var energy = self.EnergyDrainSpeed * delta;
+		self.energy_level -= energy
+		if self._left_charge_target:
+			self._left_charge_target.charge(energy)
 	if self._right_hand.is_shooting():
-		self.energy_level -= self.EnergyDrainSpeed * delta
+		var energy = self.EnergyDrainSpeed * delta;
+		self.energy_level -= energy
+		if self._right_charge_target:
+			self._right_charge_target.charge(energy)
 	self.energy_level = max(self.energy_level, 0)
 
 	if !self._has_energy():
@@ -51,13 +70,13 @@ func move(forward: float, sideways: float) -> void:
 		return
 
 	var dir = Vector3.ZERO
-	dir += forward * self.global_transform.basis.z
+	dir += forward * self._harness.global_transform.basis.z
 	dir += sideways * self._head_pivot.global_transform.basis.x
 	self._movement_dir = dir.normalized()
 
 
 func turn(x_rotation: float, y_rotation: float) -> void:
-	self.rotate_y(y_rotation)
+	self._harness.rotate_y(y_rotation)
 	self._head_pivot.rotate_x(x_rotation)
 	self._head_pivot.rotation.x = clamp(self._head_pivot.rotation.x, self.min_head_angle, self.max_head_angle)
 
@@ -71,7 +90,7 @@ func start_shooting_left() -> void:
 
 func stop_shooting_left() -> void:
 	self._left_hand.stop_shooting()
-
+	self._left_charge_target = null
 
 
 func start_shooting_right() -> void:
@@ -83,6 +102,7 @@ func start_shooting_right() -> void:
 
 func stop_shooting_right() -> void:
 	self._right_hand.stop_shooting()
+	self._right_charge_target = null
 
 
 func stop_shooting() -> void:
