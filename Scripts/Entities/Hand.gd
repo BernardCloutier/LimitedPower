@@ -4,8 +4,9 @@ extends Spatial
 export(PackedScene) var ElectricArcScene
 export(int, 0, 16) var NumArcs = 8
 
-var track_target: Spatial
-var target: Vector3 setget _set_target
+var _copy_transform: Spatial
+var target_position: Vector3 setget _set_target
+var target: Chargeable
 
 var _arcs := []
 var _is_shooting: bool = false
@@ -19,8 +20,12 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if self.track_target and !self._is_shooting:
-		self.global_transform = self.track_target.global_transform
+	if self._copy_transform and !self._is_shooting:
+		self.global_transform = self._copy_transform.global_transform
+
+
+func copy_transform(node: Spatial) -> void:
+	self._copy_transform = node
 
 
 func shoot() -> void:

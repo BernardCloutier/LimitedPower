@@ -21,8 +21,8 @@ func _ready() -> void:
 	get_node("../SpawnedEntities").add_child(self._left_hand)
 	get_node("../SpawnedEntities").add_child(self._right_hand)
 	
-	self._left_hand.track_target = self._left_hand_pos
-	self._right_hand.track_target = self._right_hand_pos
+	self._left_hand.copy_transform(self._left_hand_pos)
+	self._right_hand.copy_transform(self._right_hand_pos)
 
 
 func _process(delta: float) -> void:
