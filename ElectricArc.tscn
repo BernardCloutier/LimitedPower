@@ -1,0 +1,85 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://ElectricArc.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Sprites/spark.png" type="Texture" id=2]
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0.101961, 1, 0, 1 )
+
+[sub_resource type="SphereMesh" id=7]
+material = SubResource( 6 )
+radius = 0.3
+height = 0.6
+
+[sub_resource type="SpatialMaterial" id=8]
+albedo_color = Color( 0.996078, 0.054902, 0.054902, 1 )
+
+[sub_resource type="SphereMesh" id=9]
+material = SubResource( 8 )
+radius = 0.32
+height = 0.6
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_transparent = true
+flags_unshaded = true
+params_billboard_mode = 1
+params_billboard_keep_scale = true
+albedo_color = Color( 0, 0.898039, 1, 0.737255 )
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="QuadMesh" id=2]
+material = SubResource( 1 )
+size = Vector2( 0.5, 0.5 )
+
+[sub_resource type="Curve" id=5]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.931373, 0.176136 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0, 0.98895, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.535912, 1, 1, 1, 0 )
+
+[node name="ElectricArc" type="ImmediateGeometry"]
+cast_shadow = 0
+script = ExtResource( 1 )
+segment_length = 0.4
+amplitude = 1.3
+
+[node name="Start" type="Position3D" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="Start"]
+visible = false
+mesh = SubResource( 7 )
+material/0 = null
+
+[node name="End" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10 )
+
+[node name="MeshInstance" type="MeshInstance" parent="End"]
+visible = false
+mesh = SubResource( 9 )
+material/0 = null
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="CPUParticles" type="CPUParticles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.97935 )
+emitting = false
+amount = 3
+lifetime = 0.06
+preprocess = 1.19
+explosiveness = 0.08
+randomness = 0.17
+lifetime_randomness = 0.26
+local_coords = false
+mesh = SubResource( 2 )
+emission_shape = 2
+emission_box_extents = Vector3( 0.3, 0.3, 2.5 )
+spread = 89.59
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 12.0
+scale_amount_curve = SubResource( 5 )
+color_ramp = SubResource( 4 )
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
