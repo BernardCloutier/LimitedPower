@@ -24,10 +24,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Entities/CharacterController.gd"
 }, {
+"base": "Reference",
+"class": "ChargePlatform",
+"language": "GDScript",
+"path": "res://Scripts/Entities/ChargedPlatform.gd"
+}, {
 "base": "KinematicBody",
 "class": "Chargeable",
 "language": "GDScript",
 "path": "res://Scripts/Entities/Chargeable.gd"
+}, {
+"base": "Reference",
+"class": "DrainingChargeStation",
+"language": "GDScript",
+"path": "res://Scripts/Entities/ChargeStation.gd"
 }, {
 "base": "Chargeable",
 "class": "DrainingChargeable",
@@ -57,12 +67,12 @@ _global_script_classes=[ {
 "base": "StaticBody",
 "class": "MagneticPath",
 "language": "GDScript",
-"path": "res://Scenes/Entities/MagneticPath.gd"
+"path": "res://Scripts/Entities/MagneticPath.gd"
 }, {
 "base": "Spatial",
 "class": "MagneticPathway",
 "language": "GDScript",
-"path": "res://Scenes/Entities/MagneticPathway.gd"
+"path": "res://Scripts/Entities/MagneticPathway.gd"
 }, {
 "base": "Object",
 "class": "Movement",
@@ -73,7 +83,9 @@ _global_script_class_icons={
 "Battery": "",
 "BunnyHopMovement": "",
 "CharacterController": "",
+"ChargePlatform": "",
 "Chargeable": "",
+"DrainingChargeStation": "",
 "DrainingChargeable": "",
 "ElectricArc": "",
 "EnergyReserve": "",
@@ -167,7 +179,8 @@ pause={
 3d_physics/layer_1="Player"
 3d_physics/layer_2="Static"
 3d_physics/layer_3="Kinematic"
-3d_physics/layer_4="Magnetic Paths"
+3d_physics/layer_4="Gravity Paths"
+3d_physics/layer_5="Moving Path"
 
 [physics]
 

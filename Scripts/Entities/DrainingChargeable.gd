@@ -36,6 +36,7 @@ func on_energy_changed(new_energy_level: float, old_energy_level: float) -> void
 		self._charge_hold_timer.start(self.ChargeHoldDuration)
 		self._is_draining = false
 	self._update_audio(new_energy_level)
+	self.on_energy_changed2(new_energy_level, old_energy_level)
 
 
 func _update_audio(percent: float) -> void:
@@ -53,3 +54,7 @@ func _on_ChargeHoldTimer_timeout() -> void:
 
 func _on_fully_charged():
 	self._is_fully_charged = true
+
+
+func on_energy_changed2(new_energy_level: float, old_energy_level: float) -> void:
+	pass

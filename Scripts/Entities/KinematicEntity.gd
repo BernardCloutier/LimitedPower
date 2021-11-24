@@ -18,9 +18,9 @@ var _velocity := Vector3.ZERO
 
 func _physics_process(delta: float) -> void:
 	if self.target_basis != null:
-		self.global_transform.basis.x = lerp(self.global_transform.basis.x, self.target_basis.x, delta * 2)
-		self.global_transform.basis.y = lerp(self.global_transform.basis.y, self.target_basis.y, delta * 2)
-		self.global_transform.basis.z = lerp(self.global_transform.basis.z, self.target_basis.z, delta * 2)
+		self.global_transform.basis.x = lerp(self.global_transform.basis.x, self.target_basis.x, delta * 5)
+		self.global_transform.basis.y = lerp(self.global_transform.basis.y, self.target_basis.y, delta * 5)
+		self.global_transform.basis.z = lerp(self.global_transform.basis.z, self.target_basis.z, delta * 5)
 	
 	var ground_modifier := 1.0
 	var new_velocity := _move_handler.move(

@@ -1,0 +1,74 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/Entities/MagneticPathway.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Entities/MagneticPath.gd" type="Script" id=2]
+
+[sub_resource type="CubeMesh" id=5]
+size = Vector3( 2, 0.5, 2 )
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 1, 0.25, 1 )
+
+[node name="GravityPathway" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0 )
+script = ExtResource( 1 )
+
+[node name="MagneticPath0" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.229298, 0 )
+collision_layer = 10
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Platform" type="MeshInstance" parent="MagneticPath0"]
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="MagneticPath0"]
+shape = SubResource( 6 )
+
+[node name="MagneticPath1" type="StaticBody" parent="."]
+transform = Transform( 2.12132, 0.707107, 0, -2.12132, 0.707107, 0, 0, 0, 1, -4.04026, 1.70774, 0 )
+collision_layer = 10
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Platform" type="MeshInstance" parent="MagneticPath1"]
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="MagneticPath1"]
+shape = SubResource( 6 )
+
+[node name="MagneticPath2" type="StaticBody" parent="."]
+transform = Transform( 0.737608, 0.968252, -0.0451262, -2.90791, 0.245673, -0.00992019, 0.00444324, 0.04618, 0.998932, -6.76257, 4.92118, 0.164416 )
+collision_layer = 10
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Platform" type="MeshInstance" parent="MagneticPath2"]
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="MagneticPath2"]
+shape = SubResource( 6 )
+
+[node name="MagneticPath3" type="StaticBody" parent="."]
+transform = Transform( -1.53463, 0.858375, -0.0389237, -2.57777, -0.51094, 0.0248944, 0.00444324, 0.04618, 0.998932, -7.05492, 8.79839, 0.158492 )
+collision_layer = 10
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Platform" type="MeshInstance" parent="MagneticPath3"]
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="MagneticPath3"]
+shape = SubResource( 6 )

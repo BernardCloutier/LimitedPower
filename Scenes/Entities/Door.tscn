@@ -135,8 +135,8 @@ script = ExtResource( 3 )
 
 [node name="DoorBody" type="KinematicBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
-collision_layer = 2
-collision_mask = 3
+collision_layer = 4
+collision_mask = 7
 script = ExtResource( 2 )
 ChargeIndicator = NodePath("Viewport/TextureProgress")
 max_volume = -4.0

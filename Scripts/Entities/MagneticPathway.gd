@@ -1,7 +1,7 @@
 class_name MagneticPathway
 extends Spatial
 
-export(float, 0, 15) var EnergyDrainSpeed := 0.2
+export(float, 0, 15) var EnergyDrainSpeed := 0.05
 
 var energy_source: EnergyReserve
 

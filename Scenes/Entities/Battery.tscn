@@ -37,8 +37,8 @@ radius = 0.4
 height = 1.5
 
 [node name="Battery" type="KinematicBody"]
-collision_layer = 2
-collision_mask = 3
+collision_layer = 4
+collision_mask = 7
 script = ExtResource( 1 )
 ChargeIndicator = NodePath("Body/Viewport/TextureProgress")
 ChargeMaterial = SubResource( 8 )

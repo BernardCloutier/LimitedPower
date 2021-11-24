@@ -34,8 +34,8 @@ func _process(delta: float) -> void:
 			else:
 				var energy = self._charge_target.decharge(energy_amount)
 				self.energy_source.add_energy(energy)
-			if !self._charge_target.has_charge():
-				self.stop_shooting()
+				if !self._charge_target.has_charge():
+					self.stop_shooting()
 
 
 func copy_transform(node: Spatial) -> void:

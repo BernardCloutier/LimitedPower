@@ -5,7 +5,7 @@ export(PackedScene) var HandScene
 export(float, 0.0, 3.0) var EnergyDrainSpeed = 0.2
 
 onready var _energy_reserve := $EnergyReserve
-onready var _ground_raycast := $GroundRayCast
+onready var _platform_raycast := $PlatformRayCast
 onready var _harness := $Harness
 onready var _head_pivot := $Harness/HeadPivot
 onready var _raycast := $Harness/HeadPivot/RayCast
@@ -14,9 +14,6 @@ onready var _right_hand_pos := $Harness/HeadPivot/RightHandPos
 
 var _left_hand: Hand 
 var _right_hand: Hand
-var _left_charge_target: Chargeable
-var _right_charge_target: Chargeable
-var _magnetic_pathway: MagneticPathway
 
 
 func _ready() -> void:
@@ -31,26 +28,6 @@ func _ready() -> void:
 	self._right_hand.energy_drain_speed = self.EnergyDrainSpeed
 	self._left_hand.copy_transform(self._left_hand_pos)
 	self._right_hand.copy_transform(self._right_hand_pos)
-
-
-func _process(_delta: float) -> void:
-	if !self.is_on_floor():
-		self.stop_shooting()
-	if self._ground_raycast.is_colliding():
-		var collider = self._ground_raycast.get_collider()
-		if collider is MagneticPath:
-			self.target_basis = collider.global_transform.basis.orthonormalized()
-			self._magnetic_pathway = collider.pathway
-			self._magnetic_pathway.energy_source = self._energy_reserve
-			self.gravity_dir = (self.target_basis * Vector3.DOWN).normalized()
-			print("Gravity: ", self.gravity_dir)
-	else:
-		if self._magnetic_pathway:
-			self._magnetic_pathway.energy_source = null
-			self._magnetic_pathway = null
-			self.gravity_dir = Vector3.DOWN
-			self.target_basis = Basis(Vector3.UP, 0)
-
 
 
 func update_movement(forward: float, sideways: float) -> void:
@@ -109,6 +86,10 @@ func stop_shooting() -> void:
 	self.stop_shooting_right()
 
 
+func leave_gravity_field() -> void:
+	self._platform_raycast.leave_gravity_field()
+
+
 func recharge(energy: float):
 	self._energy_reserve.add_energy(energy)
 
@@ -128,3 +109,4 @@ func _can_shoot() -> bool:
 func _on_EnergyReserve_energy_level_changed(new_value):
 	if new_value < 0.0001:
 		self.stop_shooting()
+		self.leave_gravity_field()
