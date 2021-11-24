@@ -5,7 +5,7 @@
 [ext_resource path="res://Scenes/Entities/Battery.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Audio/Tracks/322074__edemson86__industrialfrosty.ogg" type="AudioStream" id=4]
 [ext_resource path="res://Scenes/Entities/Door.tscn" type="PackedScene" id=5]
-[ext_resource path="res://GravityPathway.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Entities/GravityPathway.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Entities/MovingPlatform.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CubeMesh" id=1]

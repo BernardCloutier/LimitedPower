@@ -2,4 +2,4 @@ class_name MagneticPath
 extends StaticBody
 
 
-onready var pathway: MagneticPathway = get_node("..")
+onready var pathway = get_node("..")

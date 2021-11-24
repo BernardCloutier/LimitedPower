@@ -24,7 +24,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Entities/CharacterController.gd"
 }, {
-"base": "Reference",
+"base": "KinematicBody",
 "class": "ChargePlatform",
 "language": "GDScript",
 "path": "res://Scripts/Entities/ChargedPlatform.gd"
@@ -34,7 +34,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Entities/Chargeable.gd"
 }, {
-"base": "Reference",
+"base": "DrainingChargeable",
 "class": "DrainingChargeStation",
 "language": "GDScript",
 "path": "res://Scripts/Entities/ChargeStation.gd"
@@ -99,7 +99,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Limited Power"
-run/main_scene="res://Tutorial.tscn"
+run/main_scene="res://Scenes/Sandbox.tscn"
 config/icon="res://icon.png"
 
 [autoload]
