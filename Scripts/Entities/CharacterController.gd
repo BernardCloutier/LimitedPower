@@ -4,6 +4,8 @@ extends KinematicEntity
 export(PackedScene) var HandScene
 export(float, 0.0, 3.0) var EnergyDrainSpeed = 0.2
 
+onready var _energy_reserve := $EnergyReserve
+onready var _ground_raycast := $GroundRayCast
 onready var _harness := $Harness
 onready var _head_pivot := $Harness/HeadPivot
 onready var _raycast := $Harness/HeadPivot/RayCast
@@ -14,8 +16,7 @@ var _left_hand: Hand
 var _right_hand: Hand
 var _left_charge_target: Chargeable
 var _right_charge_target: Chargeable
-
-var energy_level: float = 1.0
+var _magnetic_pathway: MagneticPathway
 
 
 func _ready() -> void:
@@ -24,47 +25,35 @@ func _ready() -> void:
 	self.add_child(self._left_hand)
 	self.add_child(self._right_hand)
 	
+	self._left_hand.energy_source = self._energy_reserve
+	self._right_hand.energy_source = self._energy_reserve
+	self._left_hand.energy_drain_speed = self.EnergyDrainSpeed
+	self._right_hand.energy_drain_speed = self.EnergyDrainSpeed
 	self._left_hand.copy_transform(self._left_hand_pos)
 	self._right_hand.copy_transform(self._right_hand_pos)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if !self.is_on_floor():
 		self.stop_shooting()
-
-	if self._raycast.is_colliding():
-		var dist = (self._raycast.get_collision_point() - self._left_hand.global_transform.origin).length()
-		var target = self._raycast.get_collision_point()
-		self._left_hand.target = target
-		self._right_hand.target = target
-		
-		var object = self._raycast.get_collider()
-		if object is Chargeable:
-			if self._left_hand.is_shooting():
-				self._left_charge_target = object
-			if self._right_hand.is_shooting():
-				self._right_charge_target = object
+	if self._ground_raycast.is_colliding():
+		var collider = self._ground_raycast.get_collider()
+		if collider is MagneticPath:
+			self.target_basis = collider.global_transform.basis.orthonormalized()
+			self._magnetic_pathway = collider.pathway
+			self._magnetic_pathway.energy_source = self._energy_reserve
+			self.gravity_dir = (self.target_basis * Vector3.DOWN).normalized()
+			print("Gravity: ", self.gravity_dir)
 	else:
-		self.stop_shooting()
-	
-	# TODO: If both hands, charge even faster
-	if self._left_hand.is_shooting():
-		var energy = self.EnergyDrainSpeed * delta;
-		self.energy_level -= energy
-		if self._left_charge_target:
-			self._left_charge_target.charge(energy)
-	if self._right_hand.is_shooting():
-		var energy = self.EnergyDrainSpeed * delta;
-		self.energy_level -= energy
-		if self._right_charge_target:
-			self._right_charge_target.charge(energy)
-	self.energy_level = max(self.energy_level, 0)
-
-	if !self._has_energy():
-		self.stop_shooting()
+		if self._magnetic_pathway:
+			self._magnetic_pathway.energy_source = null
+			self._magnetic_pathway = null
+			self.gravity_dir = Vector3.DOWN
+			self.target_basis = Basis(Vector3.UP, 0)
 
 
-func move(forward: float, sideways: float) -> void:
+
+func update_movement(forward: float, sideways: float) -> void:
 	if self._is_shooting():
 		self._movement_dir = Vector3.ZERO
 		return
@@ -82,27 +71,37 @@ func turn(x_rotation: float, y_rotation: float) -> void:
 
 
 func start_shooting_left() -> void:
-	if self._can_shoot():
+	if !self._can_shoot():
 		return
 
-	self._left_hand.shoot()
+	if self._raycast.is_colliding():
+		var target = self._raycast.get_collision_point()
+		self._left_hand.target_position = target
+		
+		var object = self._raycast.get_collider()
+		if object is Chargeable:
+			self._left_hand.shoot(object)
 
 
 func stop_shooting_left() -> void:
 	self._left_hand.stop_shooting()
-	self._left_charge_target = null
 
 
 func start_shooting_right() -> void:
-	if self._can_shoot():
+	if !self._can_shoot():
 		return
 
-	self._right_hand.shoot()
+	if self._raycast.is_colliding():
+		var target = self._raycast.get_collision_point()
+		self._right_hand.target_position = target
+		
+		var object = self._raycast.get_collider()
+		if object is Chargeable:
+			self._right_hand.shoot(object)
 
 
 func stop_shooting_right() -> void:
 	self._right_hand.stop_shooting()
-	self._right_charge_target = null
 
 
 func stop_shooting() -> void:
@@ -111,20 +110,21 @@ func stop_shooting() -> void:
 
 
 func recharge(energy: float):
-	self.energy_level = min(self.energy_level + energy, 1.0)
+	self._energy_reserve.add_energy(energy)
 
 
 func _has_energy() -> bool:
-	return self.energy_level > 0.0
+	return self._energy_reserve.has_energy()
 
 
 func _is_shooting() -> bool:
-		return self._left_hand.is_shooting() or self._right_hand.is_shooting()
+	return self._left_hand.is_shooting() or self._right_hand.is_shooting()
 
 
 func _can_shoot() -> bool:
-	return !self._has_energy() or !self.is_on_floor()
+	return self.is_on_floor()
 
 
-func _on_Recharger_body_entered(body):
-	pass # Replace with function body.
+func _on_EnergyReserve_energy_level_changed(new_value):
+	if new_value < 0.0001:
+		self.stop_shooting()

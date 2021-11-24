@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/244239__chewiesmissus__electromagnetic-mic-on-xbox-battery.wav-e370aea74d14ebe05d808eb42e7bfaf6.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Effects/244239__chewiesmissus__electromagnetic-mic-on-xbox-battery.wav"
+dest_files=[ "res://.import/244239__chewiesmissus__electromagnetic-mic-on-xbox-battery.wav-e370aea74d14ebe05d808eb42e7bfaf6.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

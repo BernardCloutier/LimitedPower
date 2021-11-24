@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Entities/PlayerController.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Entities/CharacterController.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Entities/Hand.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scripts/Entities/EnergyReserve.gd" type="Script" id=4]
 
 [sub_resource type="CapsuleMesh" id=1]
 radius = 0.6
@@ -11,17 +12,15 @@ radius = 0.6
 radius = 0.6
 
 [node name="Player" type="KinematicBody"]
+collision_mask = 3
 script = ExtResource( 2 )
 HandScene = ExtResource( 3 )
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 0 )
-mesh = SubResource( 1 )
-material/0 = null
+[node name="PlayerController" type="Node" parent="."]
+script = ExtResource( 1 )
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 0 )
-shape = SubResource( 2 )
+[node name="EnergyReserve" type="Node" parent="."]
+script = ExtResource( 4 )
 
 [node name="Harness" type="Spatial" parent="."]
 
@@ -43,5 +42,18 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.936, -0.564, -1.163 )
 [node name="RightHandPos" type="Position3D" parent="Harness/HeadPivot"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.936, -0.564, -1.163 )
 
-[node name="PlayerController" type="Node" parent="."]
-script = ExtResource( 1 )
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 0 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 0 )
+shape = SubResource( 2 )
+
+[node name="GroundRayCast" type="RayCast" parent="."]
+enabled = true
+cast_to = Vector3( 0, -5, 0 )
+collision_mask = 8
+
+[connection signal="energy_level_changed" from="EnergyReserve" to="." method="_on_EnergyReserve_energy_level_changed" flags=3]

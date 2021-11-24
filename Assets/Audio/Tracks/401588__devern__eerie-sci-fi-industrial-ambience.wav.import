@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/401588__devern__eerie-sci-fi-industrial-ambience.wav-55af64425b94bd63621292dc064693d1.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Tracks/401588__devern__eerie-sci-fi-industrial-ambience.wav"
+dest_files=[ "res://.import/401588__devern__eerie-sci-fi-industrial-ambience.wav-55af64425b94bd63621292dc064693d1.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

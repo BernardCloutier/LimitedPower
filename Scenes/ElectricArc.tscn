@@ -1,7 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/ElectricArc.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/spark.png" type="Texture" id=2]
+
+[sub_resource type="SpatialMaterial" id=10]
+flags_unshaded = true
+vertex_color_use_as_albedo = true
 
 [sub_resource type="SpatialMaterial" id=6]
 albedo_color = Color( 0.101961, 1, 0, 1 )
@@ -39,9 +43,9 @@ offsets = PoolRealArray( 0, 0.98895, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.535912, 1, 1, 1, 0 )
 
 [node name="ElectricArc" type="ImmediateGeometry"]
+material_override = SubResource( 10 )
 cast_shadow = 0
 script = ExtResource( 1 )
-segment_length = 0.4
 amplitude = 1.3
 
 [node name="Start" type="Position3D" parent="."]

@@ -21,9 +21,10 @@ var energy_property: Property
 
 
 func register_energy_bar(node: Node, property: NodePath) -> void:
+	assert(node.get_indexed(property) is float)
 	energy_property = Property.new(node, property)
-	if not node.is_connected("tree_exited", self, "_unregister_object"):
-		var _err = node.connect("tree_exited", self, "_unregister_object", [node])
+	if not node.is_connected("tree_exited", self, "_unregister_property"):
+		var _err = node.connect("tree_exited", self, "_unregister_property", [energy_property])
 
 
 func _process(_delta: float) -> void:
@@ -32,5 +33,5 @@ func _process(_delta: float) -> void:
 		self._energy_bar.value = energy_value
 
 
-func _unregister_object(node: Node) -> void:
-	energy_property = null
+func _unregister_property(_property: Property) -> void:
+	_property = null

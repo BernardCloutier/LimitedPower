@@ -1,0 +1,9 @@
+Audio:
+    IndustrialFrosty.ogg by edemson86, https://freesound.org/people/edemson86/sounds/322074/
+    Ambient Space 4.wav by Suburbanwizard, https://freesound.org/people/Suburbanwizard/sounds/442181/
+    Eerie Sci-Fi Industrial Ambience by DeVern, https://freesound.org/people/DeVern/sounds/401588/
+    Sci-fi Laboratory Ambience by qubodup, https://freesound.org/people/qubodup/sounds/212025/
+    Electrical Noise by _MC5_, https://freesound.org/people/_MC5_/sounds/524934/
+    hum click lick.flac by Timbre, https://freesound.org/people/Timbre/sounds/252282/
+    Electromagnetic Mic on XBox Battery.wav by chewiesmissus, https://freesound.org/people/chewiesmissus/sounds/244239/
+    Warble Alarm Mono.wav by tombenedict, https://freesound.org/people/tombenedict/sounds/398123/

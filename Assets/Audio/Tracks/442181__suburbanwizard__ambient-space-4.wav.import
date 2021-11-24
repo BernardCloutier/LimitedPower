@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/442181__suburbanwizard__ambient-space-4.wav-904b4ccd5a782efbb3422c4e27292801.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Tracks/442181__suburbanwizard__ambient-space-4.wav"
+dest_files=[ "res://.import/442181__suburbanwizard__ambient-space-4.wav-904b4ccd5a782efbb3422c4e27292801.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

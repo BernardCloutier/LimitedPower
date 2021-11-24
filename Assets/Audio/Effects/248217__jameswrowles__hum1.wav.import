@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/248217__jameswrowles__hum1.wav-4da3adb53d5c8fbe218cce1a61d7c9f0.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Effects/248217__jameswrowles__hum1.wav"
+dest_files=[ "res://.import/248217__jameswrowles__hum1.wav-4da3adb53d5c8fbe218cce1a61d7c9f0.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

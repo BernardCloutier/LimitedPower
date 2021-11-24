@@ -3,16 +3,13 @@ extends Node
 
 onready var controller = self.get_node("..")
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	HUD.register_energy_bar(controller, "energy_level")
 
 
-func _process(delta: float) -> void:
-	self._move()
+func _process(_delta: float) -> void:
+	self._update_movement()
 
 
-func _move() -> void:
+func _update_movement() -> void:
 	var forward := -Input.get_action_strength("forward")
 	var backward := Input.get_action_strength("backward")
 	var front_dir = forward + backward
@@ -20,7 +17,7 @@ func _move() -> void:
 	var left := -Input.get_action_strength("left")
 	var right := Input.get_action_strength("right")
 	var sideways_dir = left + right
-	controller.move(front_dir, sideways_dir)
+	controller.update_movement(front_dir, sideways_dir)
 
 
 func _input(event: InputEvent) -> void:

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/212025__qubodup__sci-fi-laboratory-ambience.ogg-4480eaa037bec06fe0464c2b1164ec27.oggstr"
+
+[deps]
+
+source_file="res://Assets/Audio/Tracks/212025__qubodup__sci-fi-laboratory-ambience.ogg"
+dest_files=[ "res://.import/212025__qubodup__sci-fi-laboratory-ambience.ogg-4480eaa037bec06fe0464c2b1164ec27.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
