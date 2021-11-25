@@ -1,4 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/Entities/Door.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Entities/Player.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 20, 2, 20 )
@@ -27,9 +30,72 @@ material/0 = SubResource( 2 )
 [node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform"]
 shape = SubResource( 3 )
 
+[node name="Platform2" type="StaticBody" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 10.868, 0, 0, 0, 0.1, 0, 9, -11 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform2"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform2"]
+shape = SubResource( 3 )
+
+[node name="Platform3" type="StaticBody" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 10.868, 0, 0, 0, 0.1, 0, 9, 11 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform3"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform3"]
+shape = SubResource( 3 )
+
+[node name="Platform4" type="StaticBody" parent="Geometry"]
+transform = Transform( -4.37114e-08, 0, -0.1, 0, 10.868, 0, 1, 0, -4.37114e-09, -10, 9, -9.53674e-07 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform4"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform4"]
+shape = SubResource( 3 )
+
+[node name="Platform5" type="StaticBody" parent="Geometry"]
+transform = Transform( -4.37114e-08, 0, -0.1, 0, 8.151, 0, 1, 0, -4.37114e-09, 11, 11, -9.53674e-07 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform5"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform5"]
+shape = SubResource( 3 )
+
 [node name="Lights" type="Spatial" parent="."]
 
 [node name="OmniLight" type="OmniLight" parent="Lights"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
 light_energy = 5.452
 omni_range = 23.0
+
+[node name="Chargeables" type="Spatial" parent="."]
+
+[node name="Door" parent="Chargeables" instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10, 0, 0.5 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
