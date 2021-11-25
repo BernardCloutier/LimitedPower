@@ -45,8 +45,10 @@ collision_layer = 4
 collision_mask = 7
 script = ExtResource( 1 )
 ChargeIndicator = NodePath("Viewport/TextureProgress")
-ChargeHoldDuration = 2.0
-ChargeDrainSpeed = 0.2
+max_energy_level = 0.3
+charging_speed = 0.1
+ChargeHoldDuration = 1.8
+ChargeDrainSpeed = 0.1
 
 [node name="MeshInstance" type="MeshInstance" parent="ChargeStation"]
 mesh = SubResource( 1 )

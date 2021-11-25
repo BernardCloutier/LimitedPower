@@ -6,6 +6,7 @@ export(float, 0, 1.55) var max_head_angle = 1.4
 export(float) var ground_friction: float = 8
 export(float) var ground_sprint_factor: float = 2
 export(float) var wall_friction: float = 2
+export(float) var gravity_shift_speed: float = 2.0
 
 onready var _gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 onready var _move_handler := BunnyHopMovement.new()
@@ -18,9 +19,10 @@ var _velocity := Vector3.ZERO
 
 func _physics_process(delta: float) -> void:
 	if self.target_basis != null:
-		self.global_transform.basis.x = lerp(self.global_transform.basis.x, self.target_basis.x, delta * 5)
-		self.global_transform.basis.y = lerp(self.global_transform.basis.y, self.target_basis.y, delta * 5)
-		self.global_transform.basis.z = lerp(self.global_transform.basis.z, self.target_basis.z, delta * 5)
+		var shift_delta = self.gravity_shift_speed * delta
+		self.global_transform.basis.x = lerp(self.global_transform.basis.x, self.target_basis.x, shift_delta)
+		self.global_transform.basis.y = lerp(self.global_transform.basis.y, self.target_basis.y, shift_delta)
+		self.global_transform.basis.z = lerp(self.global_transform.basis.z, self.target_basis.z, shift_delta)
 	
 	var ground_modifier := 1.0
 	var new_velocity := _move_handler.move(

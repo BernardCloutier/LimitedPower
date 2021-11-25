@@ -20,9 +20,11 @@ func _ready() -> void:
 	self._update_audio(self._energy_level)
 
 
+
 func toggle() -> void:
-	self._is_receiving_charge = !self._is_receiving_charge
-	self._update_indicator_material(self._is_receiving_charge)
+	if self._consumers == 0:
+		self._is_receiving_charge = !self._is_receiving_charge
+		self._update_indicator_material(self._is_receiving_charge)
 
 
 func is_receiving_charge() -> bool:

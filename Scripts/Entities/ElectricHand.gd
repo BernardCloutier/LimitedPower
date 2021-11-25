@@ -1,4 +1,4 @@
-class_name Hand
+class_name ElectricHand
 extends Spatial
 
 export(PackedScene) var ElectricArcScene
@@ -6,8 +6,6 @@ export(int, 0, 16) var NumArcs = 8
 
 var _copy_transform: Spatial
 var energy_source: EnergyReserve
-var energy_drain_speed: float
-var target_position: Vector3 setget _set_target_position
 var _charge_target: Chargeable
 
 var _arcs := []
@@ -26,14 +24,21 @@ func _process(delta: float) -> void:
 		self.global_transform = self._copy_transform.global_transform
 	
 	if self.is_shooting():
-		var energy_amount = self.energy_drain_speed * delta;
+		self.update_arc_transforms()
+		var energy_amount = self._charge_target.charging_speed * delta;
 		if self._charge_target:
 			if self._charge_target.is_receiving_charge():
-				var energy = self.energy_source.request_energy(energy_amount)
-				self._charge_target.charge(energy)
+				if self._charge_target.is_full():
+					self.stop_shooting()
+				else:
+					var energy = self.energy_source.request_energy(energy_amount)
+					self._charge_target.charge(energy)
 			else:
-				var energy = self._charge_target.decharge(energy_amount)
-				self.energy_source.add_energy(energy)
+				if !self.energy_source.is_full():
+					var missing_amount = self.energy_source.MAX_ENERGY - self.energy_source.energy_level
+					var requested_amount = min(energy_amount, missing_amount)
+					var energy = self._charge_target.decharge(requested_amount)
+					self.energy_source.add_energy(energy)
 				if !self._charge_target.has_charge():
 					self.stop_shooting()
 
@@ -42,8 +47,16 @@ func copy_transform(node: Spatial) -> void:
 	self._copy_transform = node
 
 
+func update_arc_transforms() -> void:
+	self.look_at(self._charge_target.global_transform.origin, self.global_transform.basis.y)
+	var dist_to_target = (self._charge_target.global_transform.origin - self.global_transform.origin).length()
+	for arc in self._arcs:
+		arc.target_dist = dist_to_target
+
+
 func shoot(chargeable: Chargeable) -> void:
 	self._charge_target = chargeable
+	self._charge_target.start_using()
 	self._is_shooting = true
 	for arc in self._arcs:
 		arc.is_enabled = true
@@ -55,6 +68,7 @@ func stop_shooting() -> void:
 	for arc in self._arcs:
 		arc.is_enabled = false
 	if self._charge_target:
+		self._charge_target.stop_using()
 		if self._charge_target is Battery:
 			self._charge_target.toggle()
 		self._charge_target = null

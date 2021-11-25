@@ -1,9 +1,11 @@
 class_name EnergyReserve
 extends Node
 
+const MAX_ENERGY = 1.0
+
 signal energy_level_changed(new_value)
 
-var energy_level: float = 1.0
+var energy_level: float = MAX_ENERGY
 
 
 func _ready():
@@ -11,7 +13,7 @@ func _ready():
 
 
 func add_energy(amount: float) -> void:
-	self.energy_level = min(self.energy_level + amount, 1.0)
+	self.energy_level = min(self.energy_level + amount, MAX_ENERGY)
 	emit_signal("energy_level_changed", self.energy_level)
 
 
@@ -25,3 +27,7 @@ func request_energy(amount: float) -> float:
 
 func has_energy() -> bool:
 	return self.energy_level > 0
+
+
+func is_full() -> bool:
+	return !self.energy_level < 1.0

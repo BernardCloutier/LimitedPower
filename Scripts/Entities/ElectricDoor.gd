@@ -10,3 +10,4 @@ func _on_DoorBody_fully_charged():
 	if !self._is_opened:
 		self._is_opened = true
 		self._anim.play("Open")
+

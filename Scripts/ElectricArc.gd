@@ -14,7 +14,6 @@ onready var _end = $End
 onready var _particles = $CPUParticles
 onready var _random = RandomNumberGenerator.new()
 
-var target: Vector3 setget _set_target
 var target_dist: float setget _set_target_dist
 var is_enabled: bool = false setget _set_enable
 
@@ -31,12 +30,10 @@ func _process(_delta):
 		self._draw()
 
 
-func _set_target(new_target: Vector3) -> void:
-	self._end.global_transform.origin = new_target
-
-
 func _set_target_dist(dist: float) -> void:
 	self._end.transform.origin.z = -dist
+	self._particles.transform.origin.z = -dist / 2.0
+	self._particles.emission_box_extents.z = dist / 2.0
 
 
 func _set_enable(val: bool) -> void:

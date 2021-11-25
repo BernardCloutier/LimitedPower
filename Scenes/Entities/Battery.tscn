@@ -41,6 +41,7 @@ collision_layer = 4
 collision_mask = 7
 script = ExtResource( 1 )
 ChargeIndicator = NodePath("Body/Viewport/TextureProgress")
+charging_speed = 0.4
 ChargeMaterial = SubResource( 8 )
 DechargeMaterial = SubResource( 9 )
 min_volume = -12.0

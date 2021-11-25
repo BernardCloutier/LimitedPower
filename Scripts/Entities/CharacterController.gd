@@ -12,8 +12,8 @@ onready var _raycast := $Harness/HeadPivot/RayCast
 onready var _left_hand_pos := $Harness/HeadPivot/LeftHandPos
 onready var _right_hand_pos := $Harness/HeadPivot/RightHandPos
 
-var _left_hand: Hand 
-var _right_hand: Hand
+var _left_hand: ElectricHand 
+var _right_hand: ElectricHand
 
 
 func _ready() -> void:
@@ -24,8 +24,6 @@ func _ready() -> void:
 	
 	self._left_hand.energy_source = self._energy_reserve
 	self._right_hand.energy_source = self._energy_reserve
-	self._left_hand.energy_drain_speed = self.EnergyDrainSpeed
-	self._right_hand.energy_drain_speed = self.EnergyDrainSpeed
 	self._left_hand.copy_transform(self._left_hand_pos)
 	self._right_hand.copy_transform(self._right_hand_pos)
 
@@ -52,9 +50,6 @@ func start_shooting_left() -> void:
 		return
 
 	if self._raycast.is_colliding():
-		var target = self._raycast.get_collision_point()
-		self._left_hand.target_position = target
-		
 		var object = self._raycast.get_collider()
 		if object is Chargeable:
 			self._left_hand.shoot(object)
@@ -69,9 +64,6 @@ func start_shooting_right() -> void:
 		return
 
 	if self._raycast.is_colliding():
-		var target = self._raycast.get_collision_point()
-		self._right_hand.target_position = target
-		
 		var object = self._raycast.get_collider()
 		if object is Chargeable:
 			self._right_hand.shoot(object)
