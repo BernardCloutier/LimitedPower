@@ -20,9 +20,10 @@ var _velocity := Vector3.ZERO
 func _physics_process(delta: float) -> void:
 	if self.target_basis != null:
 		var shift_delta = self.gravity_shift_speed * delta
-		self.global_transform.basis.x = lerp(self.global_transform.basis.x, self.target_basis.x, shift_delta)
-		self.global_transform.basis.y = lerp(self.global_transform.basis.y, self.target_basis.y, shift_delta)
-		self.global_transform.basis.z = lerp(self.global_transform.basis.z, self.target_basis.z, shift_delta)
+		var my_quat = Quat(self.global_transform.basis)
+		var target_quat = Quat(self.target_basis)
+		var result_quat = my_quat.slerp(target_quat, shift_delta)
+		self.global_transform.basis = Basis(result_quat)
 	
 	var ground_modifier := 1.0
 	var new_velocity := _move_handler.move(

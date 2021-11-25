@@ -1,5 +1,5 @@
 class_name MagneticPath
-extends StaticBody
+extends CSGCombiner
 
 
 onready var pathway = get_node("..")

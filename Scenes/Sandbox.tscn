@@ -107,6 +107,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.803647, -1 )
 [node name="Door" parent="." instance=ExtResource( 5 )]
 
 [node name="GravityPathway" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13, -0.460705, 0 )
 
 [node name="MovingPlatform" parent="." instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -11 )
