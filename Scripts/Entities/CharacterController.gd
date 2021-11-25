@@ -46,9 +46,6 @@ func turn(x_rotation: float, y_rotation: float) -> void:
 
 
 func start_shooting_left() -> void:
-	if !self._can_shoot():
-		return
-
 	if self._raycast.is_colliding():
 		var object = self._raycast.get_collider()
 		if object is Chargeable:
@@ -60,9 +57,6 @@ func stop_shooting_left() -> void:
 
 
 func start_shooting_right() -> void:
-	if !self._can_shoot():
-		return
-
 	if self._raycast.is_colliding():
 		var object = self._raycast.get_collider()
 		if object is Chargeable:
@@ -92,10 +86,6 @@ func _has_energy() -> bool:
 
 func _is_shooting() -> bool:
 	return self._left_hand.is_shooting() or self._right_hand.is_shooting()
-
-
-func _can_shoot() -> bool:
-	return self.is_on_floor()
 
 
 func _on_EnergyReserve_energy_level_changed(new_value):
