@@ -3,6 +3,7 @@ extends KinematicEntity
 
 export(PackedScene) var HandScene
 export(float, 0.0, 3.0) var EnergyDrainSpeed = 0.2
+export(float) var initial_energy_level := 0
 
 onready var _energy_reserve := $EnergyReserve
 onready var _platform_raycast := $PlatformRayCast
@@ -11,6 +12,8 @@ onready var _head_pivot := $Harness/HeadPivot
 onready var _raycast := $Harness/HeadPivot/RayCast
 onready var _left_hand_pos := $Harness/HeadPivot/LeftHandPos
 onready var _right_hand_pos := $Harness/HeadPivot/RightHandPos
+
+onready var checkpoint: Vector3 = get_node("..").global_transform.origin
 
 var _left_hand: ElectricHand 
 var _right_hand: ElectricHand
@@ -26,6 +29,12 @@ func _ready() -> void:
 	self._right_hand.energy_source = self._energy_reserve
 	self._left_hand.copy_transform(self._left_hand_pos)
 	self._right_hand.copy_transform(self._right_hand_pos)
+	self._energy_reserve.energy_level = self.initial_energy_level
+
+
+func _process(delta):
+	if self.global_transform.origin.y < -5:
+		self.global_transform.origin = self.checkpoint
 
 
 func update_movement(forward: float, sideways: float) -> void:

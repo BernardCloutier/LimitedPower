@@ -99,7 +99,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Limited Power"
-run/main_scene="res://Scenes/Sandbox.tscn"
+run/main_scene="res://Scenes/Levels/0 - Tutorial.tscn"
 config/icon="res://icon.png"
 
 [autoload]

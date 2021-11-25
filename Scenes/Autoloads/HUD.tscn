@@ -66,3 +66,24 @@ margin_top = 241.0
 margin_right = 359.0
 margin_bottom = 259.0
 texture = ExtResource( 4 )
+
+[node name="CornerNotes" type="MarginContainer" parent="MarginContainer"]
+margin_right = 183.0
+margin_bottom = 498.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_constants/margin_top = 450
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MarginContainer/CornerNotes"]
+margin_top = 450.0
+margin_right = 183.0
+margin_bottom = 498.0
+custom_colors/font_color = Color( 1, 0.494118, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "
+Left or Right click to CHARGE
+WASD to move"
