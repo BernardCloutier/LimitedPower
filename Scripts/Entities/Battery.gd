@@ -1,7 +1,7 @@
 class_name Battery
 extends Chargeable
 
-
+export(float) var decharge_speed: float = 3.0
 export(Material) var ChargeMaterial
 export(Material) var DechargeMaterial
 export(float, -12, 0) var min_volume = -8

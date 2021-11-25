@@ -25,18 +25,19 @@ func _process(delta: float) -> void:
 	
 	if self.is_shooting():
 		self.update_arc_transforms()
-		var energy_amount = self._charge_target.charging_speed * delta;
 		if self._charge_target:
 			if self._charge_target.is_receiving_charge():
 				if self._charge_target.is_full():
 					self.stop_shooting()
 				else:
+					var energy_amount = self._charge_target.charging_speed * delta;
 					var energy = self.energy_source.request_energy(energy_amount)
 					self._charge_target.charge(energy)
 			else:
 				if !self.energy_source.is_full():
+					var charge_amount = self._charge_target.decharge_speed * delta;
 					var missing_amount = self.energy_source.MAX_ENERGY - self.energy_source.energy_level
-					var requested_amount = min(energy_amount, missing_amount)
+					var requested_amount = min(charge_amount, missing_amount)
 					var energy = self._charge_target.decharge(requested_amount)
 					self.energy_source.add_energy(energy)
 				if !self._charge_target.has_charge():
