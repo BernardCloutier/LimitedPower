@@ -24,11 +24,11 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if self._energy_level < 0.0001:
+			self._is_draining = false
 	if self._is_draining_energy():
 		var energy_amount = self.ChargeDrainSpeed * delta
 		var energy = self.decharge(energy_amount)
-		if energy < 0.0001:
-			self._is_draining = false
 
 
 func on_energy_changed(new_energy_level: float, old_energy_level: float) -> void:

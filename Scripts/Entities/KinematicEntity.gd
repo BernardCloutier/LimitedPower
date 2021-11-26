@@ -10,7 +10,7 @@ export(float) var wall_friction: float = 2
 export(float) var gravity_shift_speed: float = 2.0
 
 onready var _move_handler := BunnyHopMovement.new()
-onready var target_rotation: Quat = Quat(self.global_transform.basis) setget _set_target_rotation
+onready var target_rotation: Quat = Quat(Vector3.UP, 0) setget _set_target_rotation
 
 var _movement_dir := Vector3.ZERO
 var _velocity := Vector3.ZERO

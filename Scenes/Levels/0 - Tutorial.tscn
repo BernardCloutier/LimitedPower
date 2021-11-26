@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scenes/Entities/Door.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Entities/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://Scenes/Entities/MovingPlatform.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Entities/Battery.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Audio/Tracks/322074__edemson86__industrialfrosty.ogg" type="AudioStream" id=6]
+[ext_resource path="res://Scripts/Entities/MagneticPathway.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/Entities/MagneticPath.gd" type="Script" id=8]
+[ext_resource path="res://Scenes/Entities/Magnet.tscn" type="PackedScene" id=9]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 20, 2, 20 )
@@ -20,9 +23,24 @@ extents = Vector3( 10, 1, 10 )
 flags_transparent = true
 albedo_color = Color( 0.172549, 0.92549, 0.74902, 0.415686 )
 
-[sub_resource type="ViewportTexture" id=7]
+[sub_resource type="ViewportTexture" id=15]
 
-[sub_resource type="ViewportTexture" id=8]
+[sub_resource type="ViewportTexture" id=16]
+
+[sub_resource type="ViewportTexture" id=17]
+
+[sub_resource type="ViewportTexture" id=18]
+
+[sub_resource type="ViewportTexture" id=19]
+
+[sub_resource type="SpatialMaterial" id=9]
+albedo_color = Color( 0.682353, 0.196078, 0.952941, 1 )
+
+[sub_resource type="ViewportTexture" id=13]
+viewport_path = NodePath("Chargeables/Magnet/Viewport")
+
+[sub_resource type="ViewportTexture" id=14]
+viewport_path = NodePath("Chargeables/Magnet/Viewport")
 
 [node name="Spatial" type="Spatial"]
 
@@ -55,6 +73,51 @@ mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Geometry/Window"]
+shape = SubResource( 3 )
+
+[node name="Window2" type="StaticBody" parent="Geometry"]
+transform = Transform( 0.0429933, 0, 0, 0, 4.536, 0, 0, 0, 1.13513, 33, 2, 70 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Window2"]
+material_override = SubResource( 6 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Window2"]
+shape = SubResource( 3 )
+
+[node name="Window3" type="StaticBody" parent="Geometry"]
+transform = Transform( -2.63102e-09, 0, 0.476755, 0, 4.536, 0, -0.0429933, 0, -1.48854e-08, 30, 2, 116 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Window3"]
+material_override = SubResource( 6 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Window3"]
+shape = SubResource( 3 )
+
+[node name="Window4" type="StaticBody" parent="Geometry"]
+transform = Transform( 0.0429933, 0, 2.69815e-08, 0, 4.536, 0, -1.27792e-09, 0, 0.907741, 42, 2, 110 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Window4"]
+material_override = SubResource( 6 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Window4"]
 shape = SubResource( 3 )
 
 [node name="Platform8" type="StaticBody" parent="Geometry"]
@@ -169,6 +232,202 @@ material/0 = SubResource( 2 )
 [node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform21"]
 shape = SubResource( 3 )
 
+[node name="Platform24" type="StaticBody" parent="Geometry"]
+transform = Transform( 1.43, 0, 0, 0, 1, 0, 0, 0, 0.44, 114, -1.83694, 69 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform24"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform24"]
+shape = SubResource( 3 )
+
+[node name="Platform25" type="StaticBody" parent="Geometry"]
+transform = Transform( 1.43, 0, 0, 0, 1, 0, 0, 0, 0.44, 85, -1.83694, 69 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform25"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform25"]
+shape = SubResource( 3 )
+
+[node name="Platform47" type="StaticBody" parent="Geometry"]
+transform = Transform( -6.25073e-08, 0, 0.44, 0, 1, 0, -0.857424, 0, -1.15321e-08, 104, -1.83694, 82 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform47"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform47"]
+shape = SubResource( 3 )
+
+[node name="Platform50" type="StaticBody" parent="Geometry"]
+transform = Transform( -8.12595e-08, 0, 0.572, 0, 1, 0, -0.514455, 0, -6.91924e-09, 123, -1.83694, 103 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform50"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform50"]
+shape = SubResource( 3 )
+
+[node name="Platform52" type="StaticBody" parent="Geometry"]
+transform = Transform( -2.63281e-07, 0, 1.85328, 0, 1, 0, -0.514455, 0, -6.91924e-09, 99, -1.83694, 103 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform52"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform52"]
+shape = SubResource( 3 )
+
+[node name="Platform53" type="StaticBody" parent="Geometry"]
+transform = Transform( -5.26561e-08, 0, 0.370656, 0, 1, 0, -1.28614, 0, -1.72981e-08, 88, -1.83694, 85 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform53"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform53"]
+shape = SubResource( 3 )
+
+[node name="Platform33" type="StaticBody" parent="Geometry"]
+transform = Transform( 0.572, 0, 0, 0, 1, 0, 0, 0, 0.88, 65, -1.83694, 66 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform33"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform33"]
+shape = SubResource( 3 )
+
+[node name="Platform34" type="StaticBody" parent="Geometry"]
+transform = Transform( 0.4576, 0, 0, 0, 1, 0, 0, 0, 0.528, 46, -1.83694, 78 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform34"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform34"]
+shape = SubResource( 3 )
+
+[node name="Platform35" type="StaticBody" parent="Geometry"]
+transform = Transform( 0.6864, 0, 0, 0, 1, 0, 0, 0, 0.65472, 27, -1.83694, 75 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform35"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform35"]
+shape = SubResource( 3 )
+
+[node name="Platform40" type="StaticBody" parent="Geometry"]
+transform = Transform( 0.3432, 0, 0, 0, 1, 0, 0, 0, 0.65472, 28, -1.83694, 88 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform40"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform40"]
+shape = SubResource( 3 )
+
+[node name="Platform41" type="StaticBody" parent="Geometry"]
+transform = Transform( 0.75504, 0, 0, 0, 1, 0, 0, 0, 0.392832, 33, -1.83694, 98.6245 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform41"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform41"]
+shape = SubResource( 3 )
+
+[node name="Platform44" type="StaticBody" parent="Geometry"]
+transform = Transform( 0.302016, 0, 0, 0, 1, 0, 0, 0, 0.392832, 50, -1.83694, 98.6245 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform44"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform44"]
+shape = SubResource( 3 )
+
+[node name="Platform45" type="StaticBody" parent="Geometry"]
+transform = Transform( 0.302016, 0, 0, 0, 1, 0, 0, 0, 0.392832, 50, -1.83694, 119.624 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform45"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform45"]
+shape = SubResource( 3 )
+
+[node name="Platform42" type="StaticBody" parent="Geometry"]
+transform = Transform( 0.739939, 0, 0, 0, 1, 0, 0, 0, 0.392832, 33, -1.83694, 119.624 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform42"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform42"]
+shape = SubResource( 3 )
+
 [node name="Platform9" type="StaticBody" parent="Geometry"]
 transform = Transform( 0.9, 0, 0, 0, 15.456, 0, 0, 0, 0.4, 20, 4, 9 )
 collision_layer = 2
@@ -225,6 +484,48 @@ material/0 = SubResource( 2 )
 [node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform19"]
 shape = SubResource( 3 )
 
+[node name="Platform29" type="StaticBody" parent="Geometry"]
+transform = Transform( -3.54062e-08, 0, -0.36, 0, 15.456, 0, 0.9, 0, -1.74846e-08, 115, 4, 0 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform29"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform29"]
+shape = SubResource( 3 )
+
+[node name="Platform22" type="StaticBody" parent="Geometry"]
+transform = Transform( -3.54062e-08, 0, -0.36, 0, 15.456, 0, 1.8, 0, -3.49691e-08, 99, 4, 43 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform22"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform22"]
+shape = SubResource( 3 )
+
+[node name="Platform23" type="StaticBody" parent="Geometry"]
+transform = Transform( -3.54062e-08, 0, -0.36, 0, 15.456, 0, 2.772, 0, -5.38524e-08, 132.735, 4, 46 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform23"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform23"]
+shape = SubResource( 3 )
+
 [node name="Platform13" type="StaticBody" parent="Geometry"]
 transform = Transform( 0.9, 0, 0, 0, 15.456, 0, 0, 0, 0.4, 71, 4, 7 )
 collision_layer = 2
@@ -251,6 +552,244 @@ mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform14"]
+shape = SubResource( 3 )
+
+[node name="Platform26" type="StaticBody" parent="Geometry"]
+transform = Transform( 2.25, 0, 0, 0, 15.456, 0, 0, 0, 0.4, 45, 4, -13 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform26"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform26"]
+shape = SubResource( 3 )
+
+[node name="Platform27" type="StaticBody" parent="Geometry"]
+transform = Transform( 2.25, 0, 0, 0, 15.456, 0, 0, 0, 0.4, 45, 4, 15 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform27"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform27"]
+shape = SubResource( 3 )
+
+[node name="Platform28" type="StaticBody" parent="Geometry"]
+transform = Transform( 2.25, 0, 0, 0, 15.456, 0, 0, 0, 0.4, 96.9504, 4, -13.3144 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform28"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform28"]
+shape = SubResource( 3 )
+
+[node name="Platform30" type="StaticBody" parent="Geometry"]
+transform = Transform( 1.125, 0, 0, 0, 15.456, 0, 0, 0, 0.4, 87.9504, 4, 13.6856 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform30"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform30"]
+shape = SubResource( 3 )
+
+[node name="Platform31" type="StaticBody" parent="Geometry"]
+transform = Transform( -5.75351e-08, 0, -0.4, 0, 15.456, 0, 1.44788, 0, -1.9233e-08, 96.95, 4, 77.6856 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform31"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform31"]
+shape = SubResource( 3 )
+
+[node name="Platform46" type="StaticBody" parent="Geometry"]
+transform = Transform( 1.31625, 0, 0, 0, 15.456, 0, 0, 0, 0.4, 119.95, 4, 77.6856 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform46"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform46"]
+shape = SubResource( 3 )
+
+[node name="Platform48" type="StaticBody" parent="Geometry"]
+transform = Transform( 0.9477, 0, 0, 0, 15.456, 0, 0, 0, 0.4, 109.95, 4, 90.6856 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform48"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform48"]
+shape = SubResource( 3 )
+
+[node name="Platform49" type="StaticBody" parent="Geometry"]
+transform = Transform( 0.3159, 0, 0, 0, 15.456, 0, 0, 0, 1.56, 128.95, 4, 93.6856 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform49"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform49"]
+shape = SubResource( 3 )
+
+[node name="Platform51" type="StaticBody" parent="Geometry"]
+transform = Transform( 1.42155, 0, 0, 0, 15.456, 0, 0, 0, 0.3588, 105.95, 4, 95.6856 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform51"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform51"]
+shape = SubResource( 3 )
+
+[node name="Platform36" type="StaticBody" parent="Geometry"]
+transform = Transform( 1.97438, 0, 0, 0, 15.456, 0, 0, 0, 0.69212, 49.9504, 4, 88.6856 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform36"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform36"]
+shape = SubResource( 3 )
+
+[node name="Platform54" type="StaticBody" parent="Geometry"]
+transform = Transform( 2.36926, 0, 0, 0, 15.456, 0, 0, 0, 0.69212, 101.95, 4, 114.686 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform54"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform54"]
+shape = SubResource( 3 )
+
+[node name="Platform55" type="StaticBody" parent="Geometry"]
+transform = Transform( 0.781855, 0, 0, 0, 15.456, 0, 0, 0, 1.8272, 76.9504, 4, 90.6856 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform55"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform55"]
+shape = SubResource( 3 )
+
+[node name="Platform37" type="StaticBody" parent="Geometry"]
+transform = Transform( 2.96156, 0, 0, 0, 15.456, 0, 0, 0, 0.4, 49.9504, 4, 47.6856 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform37"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform37"]
+shape = SubResource( 3 )
+
+[node name="Platform38" type="StaticBody" parent="Geometry"]
+transform = Transform( 0.592313, 0, 0, 0, 15.456, 0, 0, 0, 2.08, 14.9504, 4, 64.6856 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform38"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform38"]
+shape = SubResource( 3 )
+
+[node name="Platform39" type="StaticBody" parent="Geometry"]
+transform = Transform( 0.231002, 0, 0, 0, 15.456, 0, 0, 0, 0.832, 22.9504, 4, 88.6856 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform39"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform39"]
+shape = SubResource( 3 )
+
+[node name="Platform43" type="StaticBody" parent="Geometry"]
+transform = Transform( 0.231002, 0, 0, 0, 15.456, 0, 0, 0, 1.0816, 22.9504, 4, 107.686 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform43"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform43"]
+shape = SubResource( 3 )
+
+[node name="Platform32" type="StaticBody" parent="Geometry"]
+transform = Transform( 1.31625, 0, 0, 0, 15.456, 0, 0, 0, 0.4, 87.9504, 4, 60.6856 )
+collision_layer = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Geometry/Platform32"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Platform32"]
 shape = SubResource( 3 )
 
 [node name="Platform2" type="StaticBody" parent="Geometry"]
@@ -354,6 +893,31 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 96, 8, 0 )
 light_energy = 5.452
 omni_range = 23.0
 
+[node name="OmniLight4" type="OmniLight" parent="Lights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 109, 15, 48 )
+light_energy = 5.452
+omni_range = 33.0
+
+[node name="OmniLight5" type="OmniLight" parent="Lights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 44, 19, 68 )
+light_energy = 5.452
+omni_range = 41.0
+
+[node name="OmniLight6" type="OmniLight" parent="Lights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 44, 19, 117 )
+light_energy = 5.452
+omni_range = 41.0
+
+[node name="OmniLight7" type="OmniLight" parent="Lights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 122, 25, 88 )
+light_energy = 5.452
+omni_range = 41.0
+
+[node name="OmniLight8" type="OmniLight" parent="Lights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 102, 24, 99 )
+light_energy = 5.452
+omni_range = 41.0
+
 [node name="Chargeables" type="Spatial" parent="."]
 
 [node name="Door" parent="Chargeables" instance=ExtResource( 1 )]
@@ -365,6 +929,12 @@ transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 62, 0, 
 [node name="Door3" parent="Chargeables" instance=ExtResource( 1 )]
 transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 109, 0, 9.5 )
 
+[node name="Door4" parent="Chargeables" instance=ExtResource( 1 )]
+transform = Transform( -1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 28, -0.685272, 80.5 )
+
+[node name="Door5" parent="Chargeables" instance=ExtResource( 1 )]
+transform = Transform( 1.94707e-07, 0, 1, 0, 1, 0, -1, 0, 1.94707e-07, 25.7243, -0.77811, 120.985 )
+
 [node name="MovingPlatform" parent="Chargeables" instance=ExtResource( 4 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 58, 0, -6.99382e-07 )
 
@@ -372,16 +942,16 @@ transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 58, 0, 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.00633, 0.75, -18.6857 )
 
 [node name="Display0" parent="Chargeables/MovingPlatform/ChargeStation" index="3"]
-texture = SubResource( 7 )
+texture = SubResource( 15 )
 
 [node name="Display1" parent="Chargeables/MovingPlatform/ChargeStation" index="4"]
-texture = SubResource( 7 )
+texture = SubResource( 15 )
 
 [node name="Display2" parent="Chargeables/MovingPlatform/ChargeStation" index="5"]
-texture = SubResource( 7 )
+texture = SubResource( 15 )
 
 [node name="Display3" parent="Chargeables/MovingPlatform/ChargeStation" index="6"]
-texture = SubResource( 7 )
+texture = SubResource( 15 )
 
 [node name="Rail0" parent="Chargeables/MovingPlatform/PlatformGroup" index="1"]
 transform = Transform( 1, 0, 1.31134e-08, 0, 1, 0, 1.31134e-08, 0, 0.7, -0.8415, 0, -11.369 )
@@ -392,6 +962,33 @@ transform = Transform( 1, 0, 1.31134e-08, 0, 1, 0, 1.31134e-08, 0, 0.7, 0.706834
 [node name="End" parent="Chargeables/MovingPlatform/PlatformGroup" index="4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.22386e-08, 0, -5.71999 )
 
+[node name="MovingPlatform3" parent="Chargeables" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, 38, -1.10426, 120.507 )
+
+[node name="ChargeStation" parent="Chargeables/MovingPlatform3" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1145, 1.01036, -18.6857 )
+
+[node name="Display0" parent="Chargeables/MovingPlatform3/ChargeStation" index="3"]
+texture = SubResource( 16 )
+
+[node name="Display1" parent="Chargeables/MovingPlatform3/ChargeStation" index="4"]
+texture = SubResource( 16 )
+
+[node name="Display2" parent="Chargeables/MovingPlatform3/ChargeStation" index="5"]
+texture = SubResource( 16 )
+
+[node name="Display3" parent="Chargeables/MovingPlatform3/ChargeStation" index="6"]
+texture = SubResource( 16 )
+
+[node name="Rail0" parent="Chargeables/MovingPlatform3/PlatformGroup" index="1"]
+transform = Transform( 1, 0, 1.31134e-08, 0, 1, 0, 1.31134e-08, 0, 0.7, -0.8415, 0, -11.369 )
+
+[node name="Rail1" parent="Chargeables/MovingPlatform3/PlatformGroup" index="2"]
+transform = Transform( 1, 0, 1.31134e-08, 0, 1, 0, 1.31134e-08, 0, 0.7, 0.706834, 0, -11.369 )
+
+[node name="End" parent="Chargeables/MovingPlatform3/PlatformGroup" index="4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.22386e-08, 0, -5.71999 )
+
 [node name="MovingPlatform2" parent="Chargeables" instance=ExtResource( 4 )]
 transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 85, 0, -6.99382e-07 )
 
@@ -399,16 +996,16 @@ transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 85, 0, -6
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.00633, 0.75, -18.6857 )
 
 [node name="Display0" parent="Chargeables/MovingPlatform2/ChargeStation" index="3"]
-texture = SubResource( 8 )
+texture = SubResource( 17 )
 
 [node name="Display1" parent="Chargeables/MovingPlatform2/ChargeStation" index="4"]
-texture = SubResource( 8 )
+texture = SubResource( 17 )
 
 [node name="Display2" parent="Chargeables/MovingPlatform2/ChargeStation" index="5"]
-texture = SubResource( 8 )
+texture = SubResource( 17 )
 
 [node name="Display3" parent="Chargeables/MovingPlatform2/ChargeStation" index="6"]
-texture = SubResource( 8 )
+texture = SubResource( 17 )
 
 [node name="Rail0" parent="Chargeables/MovingPlatform2/PlatformGroup" index="1"]
 transform = Transform( 1, 0, 1.31134e-08, 0, 1, 0, 1.31134e-08, 0, 0.7, -0.8415, 0, -11.369 )
@@ -419,13 +1016,322 @@ transform = Transform( 1, 0, 1.31134e-08, 0, 1, 0, 1.31134e-08, 0, 0.7, 0.706834
 [node name="End" parent="Chargeables/MovingPlatform2/PlatformGroup" index="4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.22386e-08, 0, -5.71999 )
 
+[node name="MovingPlatform4" parent="Chargeables" instance=ExtResource( 4 )]
+transform = Transform( -2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, 126.5, -1.02052, 83.9767 )
+
+[node name="ChargeStation" parent="Chargeables/MovingPlatform4" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.00633, 0.75, -18.6857 )
+
+[node name="Display0" parent="Chargeables/MovingPlatform4/ChargeStation" index="3"]
+texture = SubResource( 18 )
+
+[node name="Display1" parent="Chargeables/MovingPlatform4/ChargeStation" index="4"]
+texture = SubResource( 18 )
+
+[node name="Display2" parent="Chargeables/MovingPlatform4/ChargeStation" index="5"]
+texture = SubResource( 18 )
+
+[node name="Display3" parent="Chargeables/MovingPlatform4/ChargeStation" index="6"]
+texture = SubResource( 18 )
+
+[node name="Rail0" parent="Chargeables/MovingPlatform4/PlatformGroup" index="1"]
+transform = Transform( 1, 0, 1.31134e-08, 0, 1, 0, 1.31134e-08, 0, 0.7, -0.8415, 0, -11.369 )
+
+[node name="Rail1" parent="Chargeables/MovingPlatform4/PlatformGroup" index="2"]
+transform = Transform( 1, 0, 1.31134e-08, 0, 1, 0, 1.31134e-08, 0, 0.7, 0.706834, 0, -11.369 )
+
+[node name="End" parent="Chargeables/MovingPlatform4/PlatformGroup" index="4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.22386e-08, 0, -5.71999 )
+
+[node name="MovingPlatform5" parent="Chargeables" instance=ExtResource( 4 )]
+transform = Transform( -1, 0, -2.62268e-07, 0, 1, 0, 2.62268e-07, 0, -1, 121.5, -1.02052, 79.9767 )
+
+[node name="ChargeStation" parent="Chargeables/MovingPlatform5" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.00633, 0.75, -18.6857 )
+
+[node name="Display0" parent="Chargeables/MovingPlatform5/ChargeStation" index="3"]
+texture = SubResource( 19 )
+
+[node name="Display1" parent="Chargeables/MovingPlatform5/ChargeStation" index="4"]
+texture = SubResource( 19 )
+
+[node name="Display2" parent="Chargeables/MovingPlatform5/ChargeStation" index="5"]
+texture = SubResource( 19 )
+
+[node name="Display3" parent="Chargeables/MovingPlatform5/ChargeStation" index="6"]
+texture = SubResource( 19 )
+
+[node name="Rail0" parent="Chargeables/MovingPlatform5/PlatformGroup" index="1"]
+transform = Transform( 1, 0, 1.31134e-08, 0, 1, 0, 1.31134e-08, 0, 0.7, -0.8415, 0, -11.369 )
+
+[node name="Rail1" parent="Chargeables/MovingPlatform5/PlatformGroup" index="2"]
+transform = Transform( 1, 0, 1.31134e-08, 0, 1, 0, 1.31134e-08, 0, 0.7, 0.706834, 0, -11.369 )
+
+[node name="End" parent="Chargeables/MovingPlatform5/PlatformGroup" index="4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.22386e-08, 0, -5.71999 )
+
 [node name="Battery" parent="Chargeables" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 85, 1, -3 )
 
+[node name="Battery2" parent="Chargeables" instance=ExtResource( 5 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 45, 0.5, 78 )
+initial_energy_percentage = 1.0
+is_receiving_charge = false
+
+[node name="Battery3" parent="Chargeables" instance=ExtResource( 5 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 50, 0.5, 99 )
+initial_energy_percentage = 1.0
+is_receiving_charge = false
+
+[node name="GravityPathway" type="Spatial" parent="Chargeables"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 105, 0, 39 )
+script = ExtResource( 7 )
+EnergyDrainSpeed = 0.02
+
+[node name="MagneticPath0" type="CSGCombiner" parent="Chargeables/GravityPathway"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 6 )
+material_override = SubResource( 9 )
+use_collision = true
+collision_layer = 10
+collision_mask = 5
+script = ExtResource( 8 )
+
+[node name="Ramp" type="CSGBox" parent="Chargeables/GravityPathway/MagneticPath0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 3, -0.591686 )
+width = 6.0
+height = 6.0
+depth = 4.0
+
+[node name="Inner" type="CSGCylinder" parent="Chargeables/GravityPathway/MagneticPath0/Ramp"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 3, 3, 0 )
+operation = 2
+radius = 6.0
+height = 6.0
+sides = 18
+
+[node name="Outer" type="CSGCylinder" parent="Chargeables/GravityPathway/MagneticPath0/Ramp"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 3, 3, 0 )
+operation = 1
+radius = 7.0
+height = 6.0
+sides = 18
+
+[node name="Ramp4" type="CSGBox" parent="Chargeables/GravityPathway/MagneticPath0"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 29.4739, 1.9827, 10.4083 )
+width = 6.0
+height = 6.0
+depth = 4.0
+
+[node name="Inner" type="CSGCylinder" parent="Chargeables/GravityPathway/MagneticPath0/Ramp4"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 3, 3, 0 )
+operation = 2
+radius = 6.0
+height = 6.0
+sides = 18
+
+[node name="Outer" type="CSGCylinder" parent="Chargeables/GravityPathway/MagneticPath0/Ramp4"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 3, 3, 0 )
+operation = 1
+radius = 7.0
+height = 6.0
+sides = 18
+
+[node name="Ramp2" type="CSGBox" parent="Chargeables/GravityPathway/MagneticPath0"]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 9.9, 15, 9.40831 )
+width = 6.0
+height = 6.0
+depth = 4.0
+
+[node name="Inner" type="CSGCylinder" parent="Chargeables/GravityPathway/MagneticPath0/Ramp2"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 3, 3, 0 )
+operation = 2
+radius = 6.0
+height = 6.0
+sides = 18
+
+[node name="Outer" type="CSGCylinder" parent="Chargeables/GravityPathway/MagneticPath0/Ramp2"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 3, 3, 0 )
+operation = 1
+radius = 7.0
+height = 6.0
+sides = 18
+
+[node name="Ramp3" type="CSGBox" parent="Chargeables/GravityPathway/MagneticPath0"]
+transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 29.6, 14.9, 9.40831 )
+width = 6.0
+height = 6.0
+depth = 4.0
+
+[node name="Inner" type="CSGCylinder" parent="Chargeables/GravityPathway/MagneticPath0/Ramp3"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 3, 3, 0 )
+operation = 2
+radius = 6.0
+height = 6.0
+sides = 18
+
+[node name="Outer" type="CSGCylinder" parent="Chargeables/GravityPathway/MagneticPath0/Ramp3"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 3, 3, 0 )
+operation = 1
+radius = 7.0
+height = 6.0
+sides = 18
+
+[node name="CSGBox3" type="CSGBox" parent="Chargeables/GravityPathway/MagneticPath0"]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 6.79774, 8.02138, -0.591686 )
+width = 10.0
+height = 0.483485
+depth = 4.0
+
+[node name="CSGBox7" type="CSGBox" parent="Chargeables/GravityPathway/MagneticPath0"]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 32.7977, 8.02138, 9.40831 )
+width = 8.0
+height = 0.483485
+depth = 4.0
+
+[node name="CSGBox5" type="CSGBox" parent="Chargeables/GravityPathway/MagneticPath0"]
+transform = Transform( -4.37114e-08, 1, 0, 4.37114e-08, 1.91069e-15, 1, 1, 4.37114e-08, -4.37114e-08, 6.79774, 11.0214, 6.40831 )
+width = 10.0
+height = 0.483485
+depth = 4.0
+
+[node name="CSGBox4" type="CSGBox" parent="Chargeables/GravityPathway/MagneticPath0"]
+transform = Transform( 4.37114e-08, 3.82137e-15, 1, 8.74228e-08, -1, 0, 1, 8.74228e-08, -4.37114e-08, 14.9702, -0.227949, -3.6 )
+width = 10.0
+height = 0.483485
+depth = 4.0
+
+[node name="CSGBox8" type="CSGBox" parent="Chargeables/GravityPathway/MagneticPath0"]
+transform = Transform( 4.37114e-08, 3.82137e-15, 1, 8.74228e-08, -1, 0, 1, 8.74228e-08, -4.37114e-08, 24.9702, -1.16156, 14.4 )
+width = 12.0
+height = 0.483485
+depth = 4.0
+
+[node name="CSGBox6" type="CSGBox" parent="Chargeables/GravityPathway/MagneticPath0"]
+transform = Transform( -1.5, -1.31134e-07, 0, 8.74228e-08, -1, 0, 0, 0, 1, 19.9702, 18.1051, 9.4 )
+width = 10.0
+height = 0.483485
+depth = 4.0
+
+[node name="GravityPathway2" type="Spatial" parent="Chargeables"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 0, 39 )
+script = ExtResource( 7 )
+EnergyDrainSpeed = 0.02
+
+[node name="MagneticPath0" type="CSGCombiner" parent="Chargeables/GravityPathway2"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 13, -1, 6 )
+material_override = SubResource( 9 )
+use_collision = true
+collision_layer = 10
+collision_mask = 5
+script = ExtResource( 8 )
+
+[node name="Ramp" type="CSGBox" parent="Chargeables/GravityPathway2/MagneticPath0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 3, -0.591686 )
+width = 6.0
+height = 6.0
+depth = 4.0
+
+[node name="Inner" type="CSGCylinder" parent="Chargeables/GravityPathway2/MagneticPath0/Ramp"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 3, 3, 0 )
+operation = 2
+radius = 6.0
+height = 6.0
+sides = 18
+
+[node name="Outer" type="CSGCylinder" parent="Chargeables/GravityPathway2/MagneticPath0/Ramp"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 3, 3, 0 )
+operation = 1
+radius = 7.0
+height = 6.0
+sides = 18
+
+[node name="CSGBox3" type="CSGBox" parent="Chargeables/GravityPathway2/MagneticPath0"]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 6.79774, 8.02138, -0.591686 )
+width = 10.0
+height = 0.483485
+depth = 4.0
+
+[node name="CSGBox5" type="CSGBox" parent="Chargeables/GravityPathway2/MagneticPath0"]
+transform = Transform( -4.37114e-08, 1, 0, 4.37114e-08, 1.91069e-15, 1, 1, 4.37114e-08, -4.37114e-08, 6.79774, 11.0214, 13.4083 )
+width = 24.0
+height = 0.483485
+depth = 4.0
+
+[node name="CSGBox4" type="CSGBox" parent="Chargeables/GravityPathway2/MagneticPath0"]
+transform = Transform( 4.37114e-08, 3.82137e-15, 1, 8.74228e-08, -1, 0, 1, 8.74228e-08, -4.37114e-08, 14.9702, -0.227949, -3.6 )
+width = 10.0
+height = 0.483485
+depth = 4.0
+
+[node name="Ramp2" type="CSGBox" parent="Chargeables/GravityPathway2/MagneticPath0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 3, 27.4083 )
+width = 6.0
+height = 6.0
+depth = 4.0
+
+[node name="Inner" type="CSGCylinder" parent="Chargeables/GravityPathway2/MagneticPath0/Ramp2"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 3, 3, 0 )
+operation = 2
+radius = 6.0
+height = 6.0
+sides = 18
+
+[node name="Outer" type="CSGCylinder" parent="Chargeables/GravityPathway2/MagneticPath0/Ramp2"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 3, 3, 0 )
+operation = 1
+radius = 7.0
+height = 6.0
+sides = 18
+
+[node name="CSGBox6" type="CSGBox" parent="Chargeables/GravityPathway2/MagneticPath0"]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 6.79775, 8.02138, 27.4083 )
+width = 10.0
+height = 0.483485
+depth = 4.0
+
+[node name="CSGBox7" type="CSGBox" parent="Chargeables/GravityPathway2/MagneticPath0"]
+transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 17.9703, -0.169586, 27.4 )
+width = 12.0
+height = 0.483485
+depth = 4.0
+
+[node name="Magnet" parent="Chargeables" instance=ExtResource( 9 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 51, 0, 126.781 )
+
+[node name="BodyNeg" parent="Chargeables/Magnet" index="0"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0377464, 0, -1.85962 )
+
+[node name="BodyPos" parent="Chargeables/Magnet" index="1"]
+transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -0.0377464, 0, 1.86317 )
+
+[node name="Bolt" parent="Chargeables/Magnet" index="2"]
+transform = Transform( -0.0528817, 0, 0.998601, 0, 1, 0, -0.998601, 0, -0.0528817, -0.0377464, 2.24547, -0.421623 )
+
+[node name="CollisionShape" parent="Chargeables/Magnet" index="3"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0377464, 0, 0.00196075 )
+
+[node name="Positive" parent="Chargeables/Magnet" index="4"]
+transform = Transform( 1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, -0.0377464, 0, 2.65482 )
+
+[node name="Negative" parent="Chargeables/Magnet" index="5"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.0377464, 0, -2.68404 )
+
+[node name="Audio" parent="Chargeables/Magnet" index="6"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0377464, 0, -1.85962 )
+
+[node name="Display0" parent="Chargeables/Magnet" index="8"]
+transform = Transform( 4.13055e-08, -0.0470844, 0.993048, 1.05583, -3.07678e-08, -1.31109e-07, 5.50905e-08, 0.698991, 0.207137, 0.591999, 0, -0.0441818 )
+texture = SubResource( 13 )
+
+[node name="Display1" parent="Chargeables/Magnet" index="9"]
+transform = Transform( -2.97988e-10, -0.00454478, 0.999935, 1.14681, -3.34191e-08, 0, 5.01252e-08, 0.764488, 0.0217168, -0.69672, 0, -0.00361633 )
+texture = SubResource( 14 )
+
 [node name="PlayerSpawn" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7 )
 
 [node name="Player" parent="PlayerSpawn" instance=ExtResource( 2 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 105, 0, 61 )
 
 [node name="Recharger" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6 )
@@ -439,6 +1345,15 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 77, 0, 1 )
 [node name="Recharger4" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 109, 0, 26 )
 
+[node name="Recharger5" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 80, -0.836939, 69 )
+
+[node name="Recharger6" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.7482, -0.836939, 94.1087 )
+
+[node name="Recharger7" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 104.142, -0.836939, 79.1087 )
+
 [node name="BGM" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 volume_db = -13.11
@@ -446,4 +1361,8 @@ autoplay = true
 bus = "Music"
 
 [editable path="Chargeables/MovingPlatform"]
+[editable path="Chargeables/MovingPlatform3"]
 [editable path="Chargeables/MovingPlatform2"]
+[editable path="Chargeables/MovingPlatform4"]
+[editable path="Chargeables/MovingPlatform5"]
+[editable path="Chargeables/Magnet"]

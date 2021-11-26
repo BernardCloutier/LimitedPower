@@ -1,0 +1,285 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://Assets/Sprites/yellow_button05.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Entities/Magnet.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Entities/MagnetNegative.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/Entities/MagnetPositive.gd" type="Script" id=4]
+[ext_resource path="res://Assets/Audio/Effects/244239__chewiesmissus__electromagnetic-mic-on-xbox-battery.wav" type="AudioStream" id=5]
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0.266667, 0.254902, 0.254902, 1 )
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0.984314, 0.0666667, 0.0666667, 1 )
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0.027451, 0.0784314, 0.854902, 1 )
+
+[sub_resource type="SpatialMaterial" id=7]
+albedo_color = Color( 0.027451, 0.0784314, 0.854902, 1 )
+
+[sub_resource type="SpatialMaterial" id=15]
+albedo_color = Color( 0.952941, 0.694118, 0, 1 )
+
+[sub_resource type="Animation" id=14]
+resource_name = "Idle"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -1.43751, 2.51947, 0 ), Vector3( -1.438, 2.2, 0 ), Vector3( -1.438, 2.8, 0 ), Vector3( -1.43751, 2.51947, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -20, 0 ), Vector3( 0, 20, 0 ), Vector3( 0, -20, 0 ) ]
+}
+
+[sub_resource type="BoxShape" id=8]
+extents = Vector3( 2.94964, 1.67004, 0.663427 )
+
+[sub_resource type="CylinderShape" id=9]
+radius = 1.71555
+height = 24.1008
+
+[sub_resource type="SpatialMaterial" id=10]
+flags_transparent = true
+albedo_color = Color( 0.0980392, 0.0901961, 0.960784, 0.490196 )
+
+[sub_resource type="CylinderMesh" id=11]
+material = SubResource( 10 )
+top_radius = 1.5
+bottom_radius = 1.5
+height = 0.1
+
+[sub_resource type="SpatialMaterial" id=12]
+flags_transparent = true
+albedo_color = Color( 0.960784, 0.0901961, 0.0901961, 0.490196 )
+
+[sub_resource type="CylinderMesh" id=13]
+material = SubResource( 12 )
+top_radius = 1.5
+bottom_radius = 1.5
+height = 0.1
+
+[sub_resource type="ViewportTexture" id=16]
+viewport_path = NodePath("Magnet/Viewport")
+
+[sub_resource type="ViewportTexture" id=17]
+viewport_path = NodePath("Magnet/Viewport")
+
+[node name="Magnet" type="KinematicBody"]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource( 2 )
+ChargeIndicator = NodePath("Viewport/TextureProgress")
+max_energy_level = 0.08
+charging_speed = 0.1
+ChargeHoldDuration = 0.2
+ChargeDrainSpeed = 1.5
+rotate_speed = 2.0
+
+[node name="BodyNeg" type="CSGCombiner" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.79265, 0, 1.78814e-07 )
+
+[node name="CSGBox" type="CSGBox" parent="BodyNeg"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0 )
+width = 3.0
+height = 3.0
+depth = 1.0
+material = SubResource( 5 )
+
+[node name="CSGBox" type="CSGBox" parent="BodyNeg/CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.73736, 0, 0 )
+operation = 2
+width = 3.0
+height = 1.5
+depth = 1.0
+
+[node name="CSGCylinder" type="CSGCylinder" parent="BodyNeg/CSGBox"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.340718, 0, 0 )
+operation = 2
+radius = 0.75
+height = 2.0
+sides = 18
+
+[node name="CSGCylinder2" type="CSGCylinder" parent="BodyNeg/CSGBox"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.825366, 0, 0 )
+operation = 1
+radius = 1.71915
+height = 2.0
+sides = 18
+
+[node name="End" type="CSGBox" parent="BodyNeg"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.794355, 1.13027, 0.0159564 )
+width = 0.584495
+height = 0.728054
+depth = 1.00175
+material = SubResource( 4 )
+
+[node name="End2" type="CSGBox" parent="BodyNeg"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.794, -1.13, 0.016 )
+width = 0.584495
+height = 0.728054
+depth = 1.00175
+material = SubResource( 4 )
+
+[node name="BodyPos" type="CSGCombiner" parent="."]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.93014, 0, 1.19209e-07 )
+
+[node name="CSGBox" type="CSGBox" parent="BodyPos"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0 )
+width = 3.0
+height = 3.0
+depth = 1.0
+material = SubResource( 5 )
+
+[node name="CSGBox" type="CSGBox" parent="BodyPos/CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.73736, 0, 0 )
+operation = 2
+width = 3.0
+height = 1.5
+depth = 1.0
+
+[node name="CSGCylinder" type="CSGCylinder" parent="BodyPos/CSGBox"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.340718, 0, 0 )
+operation = 2
+radius = 0.75
+height = 2.0
+sides = 18
+
+[node name="CSGCylinder2" type="CSGCylinder" parent="BodyPos/CSGBox"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.825366, 0, 0 )
+operation = 1
+radius = 1.71915
+height = 2.0
+sides = 18
+
+[node name="End" type="CSGBox" parent="BodyPos"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.794355, 1.13027, 0.0159562 )
+width = 0.584495
+height = 0.728054
+depth = 1.00175
+material = SubResource( 6 )
+
+[node name="End2" type="CSGBox" parent="BodyPos"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.794, -1.13, 0.016 )
+width = 0.584495
+height = 0.728054
+depth = 1.00175
+material = SubResource( 7 )
+
+[node name="Bolt" type="CSGCombiner" parent="."]
+transform = Transform( 0.939693, 0, -0.34202, 0, 1, 0, 0.34202, 0, 0.939693, -1.43751, 2.51947, 0 )
+material_override = SubResource( 15 )
+
+[node name="CSGBox" type="CSGBox" parent="Bolt"]
+depth = 0.2
+
+[node name="CSGBox" type="CSGBox" parent="Bolt/CSGBox"]
+transform = Transform( 0.522647, -0.852549, 0, 0.852549, 0.522647, 0, 0, 0, 1, -1.28429, -0.411417, -0.0419083 )
+operation = 2
+
+[node name="CSGBox2" type="CSGBox" parent="Bolt/CSGBox"]
+transform = Transform( 0.683363, -0.730079, 0, 0.730079, 0.683363, 0, 0, 0, 1, 0.911974, -0.989907, 0.0664349 )
+operation = 2
+
+[node name="CSGBox3" type="CSGBox" parent="Bolt/CSGBox"]
+transform = Transform( 0.72404, -0.689759, 0, 0.689759, 0.72404, 0, 0, 0, 1, 1.33009, 0.403159, 0.0664349 )
+operation = 2
+
+[node name="CSGBox4" type="CSGBox" parent="Bolt/CSGBox"]
+transform = Transform( 0.513991, -0.857796, 0, 0.857796, 0.513991, 0, 0, 0, 1, -1.16319, 1.26677, 0.0664349 )
+operation = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Bolt"]
+anims/Idle = SubResource( 14 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0689316, 0, 1.78814e-07 )
+shape = SubResource( 8 )
+
+[node name="Positive" type="Position3D" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2.72179, 0, 1.78814e-07 )
+script = ExtResource( 4 )
+speed = 5.0
+
+[node name="Area" type="Area" parent="Positive"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape" type="CollisionShape" parent="Positive/Area"]
+transform = Transform( 1, 0, -3.82137e-15, -3.82137e-15, 4.37114e-08, -1, 0, 1, 4.37114e-08, 1.53006e-07, 0, 12.527 )
+shape = SubResource( 9 )
+
+[node name="CPUParticles" type="CPUParticles" parent="Positive"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+lifetime = 5.0
+mesh = SubResource( 11 )
+direction = Vector3( 0, -1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 5.0
+
+[node name="Negative" type="Position3D" parent="."]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.61707, 0, 1.78814e-07 )
+script = ExtResource( 3 )
+speed = 5.0
+
+[node name="Area" type="Area" parent="Negative"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.95906e-08, 0, 1.59205 )
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape" type="CollisionShape" parent="Negative/Area"]
+transform = Transform( 1, 0, -3.82137e-15, -3.82137e-15, 4.37114e-08, -1, 0, 1, 4.37114e-08, -1.46684e-07, 0, 12.3823 )
+shape = SubResource( 9 )
+
+[node name="CPUParticles" type="CPUParticles" parent="Negative"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.11205e-06, 0, 24.7074 )
+lifetime = 5.0
+mesh = SubResource( 13 )
+direction = Vector3( 0, 1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 5.0
+
+[node name="Audio" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.79265, 0, 1.78814e-07 )
+stream = ExtResource( 5 )
+unit_db = -8.0
+pitch_scale = 2.11
+autoplay = true
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 190, 45 )
+
+[node name="TextureProgress" type="TextureProgress" parent="Viewport"]
+margin_right = 40.0
+margin_bottom = 40.0
+max_value = 1.0
+step = 0.01
+texture_progress = ExtResource( 1 )
+
+[node name="Display0" type="Sprite3D" parent="."]
+transform = Transform( -5.50905e-08, -0.698991, -0.207137, 1.05583, -3.07678e-08, -1.31109e-07, 4.13055e-08, -0.0470844, 0.993048, -0.0227909, 0, 0.629746 )
+texture = SubResource( 16 )
+
+[node name="Display1" type="Sprite3D" parent="."]
+transform = Transform( -5.01252e-08, -0.764488, -0.0217168, 1.14681, -3.34191e-08, 0, -2.9799e-10, -0.00454481, 0.999935, -0.0633526, 0, -0.658977 )
+texture = SubResource( 17 )
