@@ -12,6 +12,8 @@ export(float) var gravity_shift_speed: float = 2.0
 onready var _move_handler := BunnyHopMovement.new()
 onready var target_rotation: Quat = Quat(Vector3.UP, 0) setget _set_target_rotation
 
+var ground_velocity := Vector3.ZERO
+
 var _movement_dir := Vector3.ZERO
 var _velocity := Vector3.ZERO
 
@@ -27,7 +29,7 @@ func _physics_process(delta: float) -> void:
 	var ground_modifier := 1.0
 	var new_velocity := _move_handler.move(
 		self._movement_dir,
-		self._velocity,
+		self._velocity + self.ground_velocity,
 		self.ground_friction,
 		ground_modifier,
 		is_on_floor(),

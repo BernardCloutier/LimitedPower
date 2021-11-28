@@ -8,7 +8,7 @@ export(float, -12, 0) var min_volume = -8
 export(float, -10, 0) var max_volume = -2
 export(float, 0, 2) var min_pitch = 0.8
 export(float, 0, 5) var max_pitch = 2.4
-export(bool) var is_receiving_charge = true
+export(bool) var is_receiving_charge_init = true
 
 onready var _audio = $Audio
 onready var _head = $Head
@@ -22,7 +22,7 @@ var _initial_position: Vector3
 func _ready() -> void:
 	$PreventFall.connect("timeout", self, "_on_prevent_fall_timeout")
 	self._initial_position = self.global_transform.origin
-	self._is_receiving_charge = self.is_receiving_charge
+	self._is_receiving_charge = self.is_receiving_charge_init
 
 
 func _process(delta) -> void:
@@ -31,6 +31,7 @@ func _process(delta) -> void:
 	self._velocity = move_and_slide(self._velocity, self.global_transform.basis.y)
 	if self.global_transform.origin.y < -10:
 		self.global_transform.origin = self._initial_position
+		self._is_receiving_charge = self.is_receiving_charge_init
 		var old_energy_level = self._energy_level
 		self._energy_level = self.initial_energy_percentage * self.max_energy_level
 		self._on_energy_changed_internal(self._energy_level, old_energy_level)

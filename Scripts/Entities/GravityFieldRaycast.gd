@@ -15,14 +15,17 @@ func _process(delta: float) -> void:
 			var my_z = self.global_transform.basis.z
 			var ground_z = (my_z - my_z.dot(ground_normal) * ground_normal).normalized()
 			var cross = ground_normal.cross(ground_z).normalized()
-			controller.target_rotation = Quat(Basis(cross, ground_normal, ground_z))
+			self.controller.target_rotation = Quat(Basis(cross, ground_normal, ground_z))
 			
 			self._magnetic_pathway = collider.pathway
 			self._magnetic_pathway.energy_source = controller._energy_reserve
 		if collider is ChargePlatform:
 			self._moving_platform = collider
-			if !_moving_platform.passengers.has(controller):
-				_moving_platform.passengers.push_back(controller)
+			self.controller.ground_velocity = self._moving_platform.velocity
+#			if !_moving_platform.passengers.has(controller):
+#				_moving_platform.passengers.push_back(controller)
+		else:
+			self.controller.ground_velocity = Vector3.ZERO
 	else:
 		if self._magnetic_pathway:
 			self.leave_gravity_field()

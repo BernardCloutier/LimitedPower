@@ -140,6 +140,8 @@ collision_layer = 4
 collision_mask = 7
 script = ExtResource( 2 )
 ChargeIndicator = NodePath("Viewport/TextureProgress")
+min_volume = -8.0
+max_volume = -4.0
 
 [node name="DoorMesh" type="MeshInstance" parent="DoorBody"]
 mesh = SubResource( 6 )

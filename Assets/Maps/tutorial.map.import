@@ -1,0 +1,13 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+path="res://.import/tutorial.map-b116cc1bebcb181e053e7e6df0e3fba5.tres"
+
+[deps]
+
+source_file="res://Assets/Maps/tutorial.map"
+dest_files=[ "res://.import/tutorial.map-b116cc1bebcb181e053e7e6df0e3fba5.tres" ]
+
+[params]
+

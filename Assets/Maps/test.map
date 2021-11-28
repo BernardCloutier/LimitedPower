@@ -1,0 +1,16 @@
+// Game: limited-power
+// Format: Standard
+// entity 0
+{
+"classname" "worldspawn"
+"_tb_textures" "textures;textures/tile_108"
+// brush 0
+{
+( -64 -64 -16 ) ( -64 -63 -16 ) ( -64 -64 -15 ) tile_108/Tiles108_Color 0 0 0 0.1 0.1
+( -64 -64 -16 ) ( -64 -64 -15 ) ( -63 -64 -16 ) tile_108/Tiles108_Color 0 0 0 0.1 0.1
+( -64 -64 -16 ) ( -63 -64 -16 ) ( -64 -63 -16 ) tile_108/Tiles108_Color 0 0 0 0.1 0.1
+( 64 64 16 ) ( 64 65 16 ) ( 65 64 16 ) tile_108/Tiles108_Color 0 0 0 0.1 0.1
+( 64 64 16 ) ( 65 64 16 ) ( 64 64 17 ) tile_108/Tiles108_Color 0 0 0 0.1 0.1
+( 64 64 16 ) ( 64 64 17 ) ( 64 65 16 ) tile_108/Tiles108_Color 0 0 0 0.1 0.1
+}
+}

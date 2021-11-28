@@ -4,6 +4,9 @@ extends Node
 onready var controller = self.get_node("..")
 
 
+var _front_input: float
+var _sideways_input: float
+
 
 func _process(_delta: float) -> void:
 	self._update_movement()
@@ -13,7 +16,7 @@ func _update_movement() -> void:
 	var forward := -Input.get_action_strength("forward")
 	var backward := Input.get_action_strength("backward")
 	var front_dir = forward + backward
-	
+
 	var left := -Input.get_action_strength("left")
 	var right := Input.get_action_strength("right")
 	var sideways_dir = left + right

@@ -35,3 +35,16 @@ func _process(_delta: float) -> void:
 
 func _unregister_property(_property: Property) -> void:
 	_property = null
+
+
+func _input(event):
+	if event is InputEventMouseButton:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+
+func _unhandled_input(event):
+	if event is InputEventMouseButton:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	if event is InputEventKey:
+		if event.scancode == KEY_ESCAPE:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

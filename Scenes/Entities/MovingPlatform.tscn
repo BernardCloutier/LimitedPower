@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scripts/Entities/ChargeStation.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/yellow_button05.png" type="Texture" id=2]
@@ -16,17 +16,10 @@ size = Vector3( 0.8, 1.5, 0.8 )
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 0.4, 0.75, 0.4 )
 
-[sub_resource type="ViewportTexture" id=7]
-viewport_path = NodePath("ChargeStation/Viewport")
+[sub_resource type="ViewportTexture" id=12]
 
-[sub_resource type="ViewportTexture" id=8]
-viewport_path = NodePath("ChargeStation/Viewport")
-
-[sub_resource type="ViewportTexture" id=9]
-viewport_path = NodePath("ChargeStation/Viewport")
-
-[sub_resource type="ViewportTexture" id=10]
-viewport_path = NodePath("ChargeStation/Viewport")
+[sub_resource type="Curve" id=13]
+_data = [ Vector2( 0, 0.0636363 ), 0.0, 0.0, 0, 0, Vector2( 0.339286, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.709821, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0727272 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="SpatialMaterial" id=4]
 flags_transparent = true
@@ -74,22 +67,22 @@ texture_progress = ExtResource( 2 )
 
 [node name="Display0" type="Sprite3D" parent="ChargeStation"]
 transform = Transform( 4.47035e-08, -3.01992e-08, 1, 0.6, -1.74846e-08, -7.45058e-08, 2.62268e-08, 0.4, 7.54979e-08, 0.406663, 0, 0 )
-texture = SubResource( 7 )
+texture = SubResource( 12 )
 script = ExtResource( 5 )
 
 [node name="Display1" type="Sprite3D" parent="ChargeStation"]
 transform = Transform( -2.62268e-08, -0.4, 0, 0.6, -1.74846e-08, 0, 0, 0, 1, 0.00666344, 0, 0.408156 )
-texture = SubResource( 8 )
+texture = SubResource( 12 )
 script = ExtResource( 5 )
 
 [node name="Display2" type="Sprite3D" parent="ChargeStation"]
 transform = Transform( 4.47035e-08, 1.74846e-08, -1, 0.6, 3.01992e-08, 7.45058e-08, 4.52987e-08, -0.4, -4.37114e-08, -0.403823, 6.03859e-08, -6.08567e-08 )
-texture = SubResource( 9 )
+texture = SubResource( 12 )
 script = ExtResource( 5 )
 
 [node name="Display3" type="Sprite3D" parent="ChargeStation"]
 transform = Transform( -2.62268e-08, -0.4, 0, 0.6, -1.74846e-08, 0, 0, 0, 1, 0.00666344, 0, -0.404705 )
-texture = SubResource( 10 )
+texture = SubResource( 12 )
 script = ExtResource( 5 )
 
 [node name="Audio" type="AudioStreamPlayer3D" parent="ChargeStation"]
@@ -104,6 +97,8 @@ collision_mask = 7
 script = ExtResource( 3 )
 start = NodePath("../Start")
 end = NodePath("../End")
+speed = 12.0
+easing_curve = SubResource( 13 )
 
 [node name="MeshInstance" type="MeshInstance" parent="PlatformGroup/Platform"]
 mesh = SubResource( 3 )
