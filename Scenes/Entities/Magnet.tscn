@@ -47,7 +47,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 1, 2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, -20, 0 ), Vector3( 0, 20, 0 ), Vector3( 0, -20, 0 ) ]
+"values": [ Vector3( 0, 20, 0 ), Vector3( 0, -20, 0 ), Vector3( 0, 20, 0 ) ]
 }
 
 [sub_resource type="BoxShape" id=8]
@@ -55,7 +55,7 @@ extents = Vector3( 2.94964, 1.67004, 0.663427 )
 
 [sub_resource type="CylinderShape" id=9]
 radius = 1.71555
-height = 24.1008
+height = 40.0
 
 [sub_resource type="SpatialMaterial" id=10]
 flags_transparent = true
@@ -78,10 +78,10 @@ bottom_radius = 1.5
 height = 0.1
 
 [sub_resource type="ViewportTexture" id=16]
-viewport_path = NodePath("Magnet/Viewport")
+viewport_path = NodePath("Viewport")
 
 [sub_resource type="ViewportTexture" id=17]
-viewport_path = NodePath("Magnet/Viewport")
+viewport_path = NodePath("Viewport")
 
 [node name="Magnet" type="KinematicBody"]
 collision_layer = 4
@@ -89,7 +89,7 @@ collision_mask = 5
 script = ExtResource( 2 )
 ChargeIndicator = NodePath("Viewport/TextureProgress")
 max_energy_level = 0.08
-charging_speed = 0.1
+charging_speed = 0.04
 ChargeHoldDuration = 0.2
 ChargeDrainSpeed = 1.5
 rotate_speed = 2.0
@@ -184,30 +184,34 @@ height = 0.728054
 depth = 1.00175
 material = SubResource( 7 )
 
-[node name="Bolt" type="CSGCombiner" parent="."]
-transform = Transform( 0.939693, 0, -0.34202, 0, 1, 0, 0.34202, 0, 0.939693, -1.43751, 2.51947, 0 )
+[node name="BoltPos" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.52314, 0, 0 )
+
+[node name="Bolt" type="CSGCombiner" parent="BoltPos"]
+transform = Transform( 0.952499, 0, -0.304541, 0, 1, 0, 0.304541, 0, 0.952499, -1.438, 2.53404, 0 )
 material_override = SubResource( 15 )
 
-[node name="CSGBox" type="CSGBox" parent="Bolt"]
+[node name="CSGBox" type="CSGBox" parent="BoltPos/Bolt"]
 depth = 0.2
 
-[node name="CSGBox" type="CSGBox" parent="Bolt/CSGBox"]
+[node name="CSGBox" type="CSGBox" parent="BoltPos/Bolt/CSGBox"]
 transform = Transform( 0.522647, -0.852549, 0, 0.852549, 0.522647, 0, 0, 0, 1, -1.28429, -0.411417, -0.0419083 )
 operation = 2
 
-[node name="CSGBox2" type="CSGBox" parent="Bolt/CSGBox"]
+[node name="CSGBox2" type="CSGBox" parent="BoltPos/Bolt/CSGBox"]
 transform = Transform( 0.683363, -0.730079, 0, 0.730079, 0.683363, 0, 0, 0, 1, 0.911974, -0.989907, 0.0664349 )
 operation = 2
 
-[node name="CSGBox3" type="CSGBox" parent="Bolt/CSGBox"]
+[node name="CSGBox3" type="CSGBox" parent="BoltPos/Bolt/CSGBox"]
 transform = Transform( 0.72404, -0.689759, 0, 0.689759, 0.72404, 0, 0, 0, 1, 1.33009, 0.403159, 0.0664349 )
 operation = 2
 
-[node name="CSGBox4" type="CSGBox" parent="Bolt/CSGBox"]
+[node name="CSGBox4" type="CSGBox" parent="BoltPos/Bolt/CSGBox"]
 transform = Transform( 0.513991, -0.857796, 0, 0.857796, 0.513991, 0, 0, 0, 1, -1.16319, 1.26677, 0.0664349 )
 operation = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Bolt"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BoltPos/Bolt"]
+autoplay = "Idle"
 anims/Idle = SubResource( 14 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
@@ -224,12 +228,14 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape" type="CollisionShape" parent="Positive/Area"]
-transform = Transform( 1, 0, -3.82137e-15, -3.82137e-15, 4.37114e-08, -1, 0, 1, 4.37114e-08, 1.53006e-07, 0, 12.527 )
+transform = Transform( 1, 0, -3.82137e-15, -3.82137e-15, 4.37114e-08, -1, 0, 1, 4.37114e-08, 4.86983e-07, 0, 20.1675 )
 shape = SubResource( 9 )
 
 [node name="CPUParticles" type="CPUParticles" parent="Positive"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
-lifetime = 5.0
+amount = 10
+lifetime = 8.0
+preprocess = 8.5
 mesh = SubResource( 11 )
 direction = Vector3( 0, -1, 0 )
 spread = 0.0
@@ -247,12 +253,14 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape" type="CollisionShape" parent="Negative/Area"]
-transform = Transform( 1, 0, -3.82137e-15, -3.82137e-15, 4.37114e-08, -1, 0, 1, 4.37114e-08, -1.46684e-07, 0, 12.3823 )
+transform = Transform( 1, 0, -3.82137e-15, -3.82137e-15, 4.37114e-08, -1, 0, 1, 4.37114e-08, -4.74814e-07, 0, 19.889 )
 shape = SubResource( 9 )
 
 [node name="CPUParticles" type="CPUParticles" parent="Negative"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.11205e-06, 0, 24.7074 )
-lifetime = 5.0
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.91746e-06, 0, 43.1331 )
+amount = 10
+lifetime = 8.5
+preprocess = 8.5
 mesh = SubResource( 13 )
 direction = Vector3( 0, 1, 0 )
 spread = 0.0

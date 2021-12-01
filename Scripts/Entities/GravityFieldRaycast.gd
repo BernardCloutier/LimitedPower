@@ -4,12 +4,14 @@ onready var controller: CharacterController = get_node("..")
 
 var _magnetic_pathway: MagneticPathway
 var _moving_platform: ChargePlatform
+var _is_in_gravity_field: bool = false
 
 
 func _process(delta: float) -> void:
 	if self.is_colliding():
 		var collider = self.get_collider()
 		if collider is MagneticPath:
+			self._enter_gravity_field()
 			var ground_normal = self.get_collision_normal()
 			var my_quat = self.global_transform.basis.get_rotation_quat()
 			var my_z = self.global_transform.basis.z
@@ -34,8 +36,17 @@ func _process(delta: float) -> void:
 			self._moving_platform = null
 
 
+func _enter_gravity_field() -> void:
+	if !self._is_in_gravity_field:
+		self._is_in_gravity_field = true
+		$Audio.play()
+
+
 func leave_gravity_field() -> void:
 	if self._magnetic_pathway:
 		self._magnetic_pathway.energy_source = null
 		self._magnetic_pathway = null
 		controller.target_rotation = Quat(Vector3.UP, 0)
+
+		self._is_in_gravity_field = false
+		$Audio.stop()

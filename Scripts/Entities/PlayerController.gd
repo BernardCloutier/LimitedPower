@@ -13,14 +13,25 @@ func _process(_delta: float) -> void:
 
 
 func _update_movement() -> void:
-	var forward := -Input.get_action_strength("forward")
-	var backward := Input.get_action_strength("backward")
-	var front_dir = forward + backward
-
-	var left := -Input.get_action_strength("left")
-	var right := Input.get_action_strength("right")
-	var sideways_dir = left + right
-	controller.update_movement(front_dir, sideways_dir)
+	var forward = 0
+	if Input.is_key_pressed(KEY_W):
+		forward -= 1
+	if Input.is_key_pressed(KEY_S):
+		forward += 1
+	var sideways = 0
+	if Input.is_key_pressed(KEY_A):
+		sideways -= 1
+	if Input.is_key_pressed(KEY_D):
+		sideways += 1
+	
+#	var forward := -Input.get_action_strength("forward")
+#	var backward := Input.get_action_strength("backward")
+#	var front_dir = forward + backward
+#
+#	var left := -Input.get_action_strength("left")
+#	var right := Input.get_action_strength("right")
+#	var sideways_dir = left + right
+	controller.update_movement(forward, sideways)
 
 
 func _input(event: InputEvent) -> void:

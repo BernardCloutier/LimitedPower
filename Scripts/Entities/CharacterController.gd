@@ -33,7 +33,7 @@ func _ready() -> void:
 
 
 func _process(delta):
-	if self.global_transform.origin.y < -5:
+	if self.global_transform.origin.y < -7:
 		self.global_transform.origin = self.checkpoint
 
 

@@ -7,3 +7,11 @@ Audio:
     hum click lick.flac by Timbre, https://freesound.org/people/Timbre/sounds/252282/
     Electromagnetic Mic on XBox Battery.wav by chewiesmissus, https://freesound.org/people/chewiesmissus/sounds/244239/
     Warble Alarm Mono.wav by tombenedict, https://freesound.org/people/tombenedict/sounds/398123/
+    Ambience music x1. by frankum, https://freesound.org/people/frankum/sounds/320501/
+
+Fonts:
+    Electricity by Billy Argel, https://www.dafont.com/electricity.font
+    CocoSharp by Zetafonts, https://www.dafont.com/cocosharp.font
+    
+Textures:
+    Contains assets from ambientCG.com, licensed under CC0 1.0 Universal.

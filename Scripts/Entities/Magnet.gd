@@ -1,6 +1,7 @@
 extends DrainingChargeable
 
 export(float) var rotate_speed = 1.0
+export(float) var initial_rotation = 0
 
 onready var positive = $Positive
 onready var negative = $Negative
@@ -9,6 +10,7 @@ var _target_rotation = 180
 
 
 func _ready() -> void:
+	self._target_rotation = initial_rotation
 	self.connect("empty", self, "_on_empty")
 
 
@@ -26,4 +28,6 @@ func _process(delta: float) -> void:
 
 
 func _on_empty() -> void:
-	_target_rotation = wrapf(_target_rotation + 180, 0, 360)
+	_target_rotation += 180.0
+	if _target_rotation > 360.0:
+		_target_rotation -= 360.0

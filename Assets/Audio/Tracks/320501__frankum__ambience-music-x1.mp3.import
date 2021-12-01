@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/320501__frankum__ambience-music-x1.mp3-93356d495f2c5ffcbd2814042fb26d90.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/Tracks/320501__frankum__ambience-music-x1.mp3"
+dest_files=[ "res://.import/320501__frankum__ambience-music-x1.mp3-93356d495f2c5ffcbd2814042fb26d90.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=5.0

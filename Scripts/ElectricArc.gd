@@ -8,6 +8,7 @@ export(int, 0, 25) var num_segments = 15
 export var amplitude = 2.0
 export var min_timer_wait = 0.05
 export var max_timer_wait = 0.25
+export var start_enabled: bool = false
 
 onready var _start = $Start
 onready var _end = $End
@@ -23,6 +24,7 @@ var points = []
 func _ready():
 	self._random.randomize()
 	self._generate_points()
+	self._set_enable(self.start_enabled)
 
 
 func _process(_delta):

@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Entities/PlayerController.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Entities/CharacterController.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Entities/Hand.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/Entities/EnergyReserve.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/Entities/GravityFieldRaycast.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Audio/Effects/524934__mc5__electrical-noise.wav" type="AudioStream" id=6]
 
 [sub_resource type="Curve" id=3]
 _data = [ Vector2( 0, 0.663636 ), 0.0, 0.0, 0, 0, Vector2( 0.712264, 0.254545 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.609091 ), 0.0, 0.0, 0, 0 ]
@@ -20,7 +21,7 @@ collision_mask = 3
 script = ExtResource( 2 )
 gravity_shift_curve = SubResource( 3 )
 ground_friction = 12.0
-gravity_shift_speed = 10.0
+gravity_shift_speed = 15.0
 HandScene = ExtResource( 3 )
 
 [node name="PlayerController" type="Node" parent="."]
@@ -63,5 +64,10 @@ enabled = true
 cast_to = Vector3( 0, -0.5, 0 )
 collision_mask = 24
 script = ExtResource( 5 )
+
+[node name="Audio" type="AudioStreamPlayer3D" parent="PlatformRayCast"]
+stream = ExtResource( 6 )
+unit_db = -15.0
+pitch_scale = 0.56
 
 [connection signal="energy_level_changed" from="EnergyReserve" to="." method="_on_EnergyReserve_energy_level_changed" flags=3]
